@@ -15,6 +15,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import { Link, Route, Routes } from 'react-router-dom';
 import Homepage from './homepage';
+import Host from './Host';
 
 const drawerWidth = 240;
 
@@ -98,13 +99,11 @@ function App() {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <Main open={open}>
+      <Main open={open} sx={{ height: "100vh"}}>
         <DrawerHeader />
         <Routes>
           <Route path="/" element={<Homepage />}></Route>
-          <Route path='/CS114_Final/'/>
-          <Route path='/QR-Component-FM/'/>
-          <Route path='/Preview-Product-FM/'/>
+          <Route path='/projects/:project' element={<Host />}/>
         </Routes>
       </Main>
       <Drawer
@@ -126,9 +125,9 @@ function App() {
         </DrawerHeader>
         <Divider />
         <List>
-          {['CS114_Final', 'QR-Component-FM', 'Preview-Product-FM'].map((text, index) => (
+          {['CS114_Final', 'QR-Component-FM', 'Product-Preview-FM'].map((text) => (
             <ListItem key={text} disablePadding>
-              <Link to={`${text}/`}>{text}</Link>
+              <Link to={`projects/${text}`}>{text}</Link>
             </ListItem>
           ))}
         </List>
