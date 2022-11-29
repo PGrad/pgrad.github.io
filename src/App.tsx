@@ -104,7 +104,7 @@ function App() {
         <DrawerHeader />
         <Routes>
           <Route path="/" element={<Homepage />}></Route>
-          <Route path='/projects/:project' element={<Host />}/>
+          <Route path='/:project' element={<Host />}/>
         </Routes>
       </Main>
       <Drawer
@@ -130,7 +130,7 @@ function App() {
           <List>
             {['QR-Component-FM', 'Product-Preview-FM'].map((text) => (
               <ListItem key={text} disablePadding>
-                <Link to={`projects/${text}`}>{text}</Link>
+                <Link to={`${text}/`}>{text}</Link>
               </ListItem>
             ))}
           </List>
@@ -141,7 +141,7 @@ function App() {
           <List>
             {['CS114_Final'].map((text) => (
               <ListItem key={text} disablePadding>
-                <Link to={`projects/${text}`}>{text}</Link>
+                <Link to={`${text}/`}>{text}</Link>
               </ListItem>
             ))}
           </List>

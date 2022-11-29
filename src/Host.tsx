@@ -5,6 +5,6 @@ export default function Host() {
     const { project } = useParams();
     console.log(project)
     return (
-        <Iframe url={`https://pgrad.github.io/${project!}/`} width="100%" height='100%' />
+        <Iframe url={`https://pgrad.github.io/${project!}`} width="100%" height='100%' />
     )
 }
