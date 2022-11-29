@@ -41,7 +41,9 @@ jobs:
         run: |
           npm install
           npm run build
-          mv build github-pages
+          mv build _site
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
 
   # Deployment job
   deploy:
