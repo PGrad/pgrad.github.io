@@ -16,6 +16,7 @@ import ListItem from '@mui/material/ListItem';
 import { Link, Route, Routes } from 'react-router-dom';
 import Homepage from './homepage';
 import Host from './Host';
+import "./App.css";
 
 const drawerWidth = 240;
 
@@ -124,13 +125,28 @@ function App() {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <List>
-          {['CS114_Final', 'QR-Component-FM', 'Product-Preview-FM'].map((text) => (
-            <ListItem key={text} disablePadding>
-              <Link to={`projects/${text}`}>{text}</Link>
-            </ListItem>
-          ))}
-        </List>
+        <div className='category'>
+          <h3 className='category-title'>Frontend Mentor</h3>
+          <List>
+            {['QR-Component-FM', 'Product-Preview-FM'].map((text) => (
+              <ListItem key={text} disablePadding>
+                <Link to={`projects/${text}`}>{text}</Link>
+              </ListItem>
+            ))}
+          </List>
+        </div>
+        <Divider />
+        <div className='category'>
+          <h3 className='category-title'>Graphics Project</h3>
+          <List>
+            {['CS114_Final'].map((text) => (
+              <ListItem key={text} disablePadding>
+                <Link to={`projects/${text}`}>{text}</Link>
+              </ListItem>
+            ))}
+          </List>
+        </div>
+        <Divider />
       </Drawer>
     </Box>
   );

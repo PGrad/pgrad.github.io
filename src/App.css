@@ -2,3 +2,11 @@
     display: flex;
     flex-direction: row;
 }
+
+.category {
+    margin-left: .5em;
+}
+
+.category-title {
+    margin-bottom: 0;
+}
