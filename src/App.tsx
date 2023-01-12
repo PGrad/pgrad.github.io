@@ -82,10 +82,10 @@ function App() {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', height: "100vh" }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
-        <Toolbar>
+        <Toolbar sx={{ backgroundColor: "white", color: "black" }}>
           <Typography variant="h6" noWrap sx={{ flexGrow: 1 }} component="div">
             Paul's Projects
           </Typography>
@@ -100,7 +100,7 @@ function App() {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <Main open={open} sx={{ height: "100vh"}}>
+      <Main open={open} sx={{ display: "flex", justifyContent: "center", background: "radial-gradient(circle, rgba(255,113,0,1) 0%, rgba(82,34,1,1) 100%)", height: "100vh" }}>
         <DrawerHeader />
         <Routes>
           <Route path="/" element={<Homepage />}></Route>
