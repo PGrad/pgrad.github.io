@@ -13,5 +13,16 @@
 
 .bare-link {
     text-decoration: none;
-    color: black;
+}
+
+@media(prefers-color-scheme: light) {
+    .bare-link {
+        color: black;
+    }
+}
+
+@media(prefers-color-scheme: dark) {
+    .bare-link {
+        color: white;
+    }
 }

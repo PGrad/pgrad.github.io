@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { styled, useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
@@ -13,10 +12,13 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
-import { Link, Route, Routes } from 'react-router-dom';
+import { HashRouter, Link, Route, Routes } from 'react-router-dom';
 import Homepage from './homepage';
 import Host from './Host';
 import "./App.css";
+import { createTheme, Theme, useMediaQuery } from '@mui/material';
+import { useMemo, useState } from 'react';
+import { ThemeProvider } from '@emotion/react';
 
 const drawerWidth = 240;
 
@@ -93,9 +95,17 @@ const categories = [
   }
 ];
 
+type RGBA = [number, number, number, number];
+
 function App() {
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const prefersDarkMode: boolean = useMediaQuery("(prefers-color-scheme: dark)");
+  const theme: Theme = useMemo(() =>
+    createTheme({
+      palette: {
+        mode: prefersDarkMode ? "dark" : "light"
+      }
+    }), [prefersDarkMode]);
+  const [open, setOpen] = useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -105,64 +115,82 @@ function App() {
     setOpen(false);
   };
 
+  const radialString = (startClr: RGBA, endClr: RGBA) => {
+    return `radial-gradient(circle,
+      rgba(${startClr[0]},${startClr[1]},${startClr[2]},${startClr[3]}) 0%,
+      rgba(${endClr[0]},${endClr[1]},${endClr[2]},${endClr[3]}) 100%)`;
+  };
+
+  const lightBkgd: string = radialString([0, 221, 225, 1], [1, 79, 82, 0.73]);
+  const darkBkgd: string = radialString([255, 113, 0, 1], [82, 34, 1, 1]);
+
   return (
-    <Box sx={{ display: 'flex', height: "100vh" }}>
-      <CssBaseline />
-      <AppBar position="fixed" open={open}>
-        <Toolbar sx={{ backgroundColor: "aliceblue", color: "black" }}>
-          <Typography variant="h6" noWrap sx={{ flexGrow: 1 }} component="div">
-            <Link className='bare-link' to={"/"}>Paul's Projects</Link>
-          </Typography>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="end"
-            onClick={handleDrawerOpen}
-            sx={{ ...(open && { display: 'none' }) }}
+    <ThemeProvider theme={theme}>
+      <HashRouter basename='/'>
+        <Box sx={{ display: 'flex', height: "100vh" }}>
+          <CssBaseline />
+          <AppBar position="fixed" open={open}>
+            <Toolbar sx={{ backgroundColor: prefersDarkMode ? "black" : "white" }}>
+              <Typography variant="h6" noWrap sx={{ flexGrow: 1 }} component="div">
+                <Link className='bare-link' to={"/"}>Paul's Projects</Link>
+              </Typography>
+              <IconButton
+                aria-label="open drawer"
+                edge="end"
+                onClick={handleDrawerOpen}
+                sx={{ ...(open && { display: 'none' }) }}
+              >
+                <MenuIcon />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+          <Main open={open} sx={{ 
+            display: "flex",
+            justifyContent: "center",
+            background: prefersDarkMode ?
+              darkBkgd : lightBkgd,
+            height: "100vh" 
+          }}>
+            <Routes>
+              <Route path='/' element={<Homepage />}/>
+              <Route path='/:project' element={<Host />}/>
+            </Routes>
+          </Main>
+          <Drawer
+            sx={{
+              width: drawerWidth,
+              flexShrink: 0,
+              '& .MuiDrawer-paper': {
+                width: drawerWidth,
+              }
+            }}
+            anchor="right"
+            variant='persistent'
+            open={open}
           >
-            <MenuIcon />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-      <Main open={open} sx={{ display: "flex", justifyContent: "center", background: "radial-gradient(circle, rgba(0,221,255,1) 0%, rgba(1,79,82,0.7298318985797444) 100%)", height: "100vh" }}>
-        <Routes>
-          <Route path='/' element={<Homepage />}/>
-          <Route path='/:project' element={<Host />}/>
-        </Routes>
-      </Main>
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
-            width: drawerWidth,
-          }
-        }}
-        anchor="right"
-        variant='persistent'
-        open={open}
-      >
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
-        {categories.map((category) => (
-          <div className='category'>
-            <h3 className='category-title'>{category["name"]}</h3>
-            <List>
-              {category["projects"].map((project, idx) => (
-                <ListItem key={idx} disablePadding>
-                  <Link to={`${project["link"]}/`}>{project["name"]}</Link>
-                </ListItem>
-              ))}
-            </List>
+            <DrawerHeader>
+              <IconButton onClick={handleDrawerClose}>
+                {theme.direction === 'rtl' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+              </IconButton>
+            </DrawerHeader>
             <Divider />
-          </div>
-        ))}
-      </Drawer>
-    </Box>
+            {categories.map((category) => (
+              <div className='category'>
+                <h3 className='category-title'>{category["name"]}</h3>
+                <List>
+                  {category["projects"].map((project, idx) => (
+                    <ListItem key={idx} disablePadding>
+                      <Link to={`${project["link"]}/`}>{project["name"]}</Link>
+                    </ListItem>
+                  ))}
+                </List>
+                <Divider />
+              </div>
+            ))}
+          </Drawer>
+        </Box>
+      </HashRouter>
+    </ThemeProvider>
   );
 }
 
