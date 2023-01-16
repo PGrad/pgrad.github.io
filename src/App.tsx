@@ -24,7 +24,6 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
   open?: boolean;
 }>(({ theme, open }) => ({
   flexGrow: 1,
-  padding: theme.spacing(3),
   transition: theme.transitions.create('margin', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -69,6 +68,31 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-start',
 }));
 
+const categories = [
+  {
+    "name": "Frontend Mentor",
+    "projects": [
+      {
+        "name": "QR Code",
+        "link": "QR-Component-FM"
+      },
+      {
+        "name": "Product Preview",
+        "link": "Product-Preview-FM"
+      }
+    ]
+  },
+  {
+    "name": "Graphics Project",
+    "projects": [
+      {
+        "name": "Bubbles and Glass",
+        "link": "CS114_Final"
+      }
+    ]
+  }
+];
+
 function App() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -85,9 +109,9 @@ function App() {
     <Box sx={{ display: 'flex', height: "100vh" }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
-        <Toolbar sx={{ backgroundColor: "white", color: "black" }}>
+        <Toolbar sx={{ backgroundColor: "aliceblue", color: "black" }}>
           <Typography variant="h6" noWrap sx={{ flexGrow: 1 }} component="div">
-            Paul's Projects
+            <Link className='bare-link' to={"/"}>Paul's Projects</Link>
           </Typography>
           <IconButton
             color="inherit"
@@ -100,10 +124,9 @@ function App() {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <Main open={open} sx={{ display: "flex", justifyContent: "center", background: "radial-gradient(circle, rgba(255,113,0,1) 0%, rgba(82,34,1,1) 100%)", height: "100vh" }}>
-        <DrawerHeader />
+      <Main open={open} sx={{ display: "flex", justifyContent: "center", background: "radial-gradient(circle, rgba(0,221,255,1) 0%, rgba(1,79,82,0.7298318985797444) 100%)", height: "100vh" }}>
         <Routes>
-          <Route path="/" element={<Homepage />}></Route>
+          <Route path='/' element={<Homepage />}/>
           <Route path='/:project' element={<Host />}/>
         </Routes>
       </Main>
@@ -113,10 +136,10 @@ function App() {
           flexShrink: 0,
           '& .MuiDrawer-paper': {
             width: drawerWidth,
-          },
+          }
         }}
-        variant="persistent"
         anchor="right"
+        variant='persistent'
         open={open}
       >
         <DrawerHeader>
@@ -125,28 +148,19 @@ function App() {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <div className='category'>
-          <h3 className='category-title'>Frontend Mentor</h3>
-          <List>
-            {['QR-Component-FM', 'Product-Preview-FM'].map((text) => (
-              <ListItem key={text} disablePadding>
-                <Link to={`${text}/`}>{text}</Link>
-              </ListItem>
-            ))}
-          </List>
-        </div>
-        <Divider />
-        <div className='category'>
-          <h3 className='category-title'>Graphics Project</h3>
-          <List>
-            {['CS114_Final'].map((text) => (
-              <ListItem key={text} disablePadding>
-                <Link to={`${text}/`}>{text}</Link>
-              </ListItem>
-            ))}
-          </List>
-        </div>
-        <Divider />
+        {categories.map((category) => (
+          <div className='category'>
+            <h3 className='category-title'>{category["name"]}</h3>
+            <List>
+              {category["projects"].map((project, idx) => (
+                <ListItem key={idx} disablePadding>
+                  <Link to={`${project["link"]}/`}>{project["name"]}</Link>
+                </ListItem>
+              ))}
+            </List>
+            <Divider />
+          </div>
+        ))}
       </Drawer>
     </Box>
   );

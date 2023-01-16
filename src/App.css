@@ -10,3 +10,8 @@
 .category-title {
     margin-bottom: 0;
 }
+
+.bare-link {
+    text-decoration: none;
+    color: black;
+}
