@@ -109,7 +109,14 @@ function App() {
       }
     }), [prefersDarkMode]);
   const [open, setOpen] = useState(true);
-  const [selectedProject, setSelectedProject] = useState(-1);
+  const [selectedProject, setSelectedProject] = useState(() => {
+    const initVal = localStorage.getItem("selected") || "-1";
+    return Number(initVal);
+  });
+
+  useEffect(() => {
+    localStorage.setItem("selected", String(selectedProject));
+  }, [selectedProject]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -193,8 +200,8 @@ function App() {
               </IconButton>
             </DrawerHeader>
             <Divider />
-            {categories.map((category) => (
-              <div className='category'>
+            {categories.map((category, idx) => (
+              <div key={idx} className='category'>
                 <h3 className='category-title'>{category["name"]}</h3>
                 <Divider variant='middle' />
                 <List>

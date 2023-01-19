@@ -14,11 +14,24 @@
 
 .item {
     border-radius: 1.5px;
-    text-align: center;
 }
 
 .link {
     margin: 0 .5em 0 .5em;
+}
+
+@media(prefers-color-scheme: light) {
+    .sel-item {
+        background: linear-gradient(90deg, rgba(200,200,200,0.73) 0%, rgba(255,255,255,1) 100%);
+        border: .5px inset black;
+    }
+}
+
+@media(prefers-color-scheme: dark) {
+    .sel-item {
+        background: linear-gradient(90deg, rgba(56,56,56,0.73) 0%, rgba(0,0,0,1) 100%);
+        border: .5px outset white;
+    }
 }
 
 .not-sel-item {
