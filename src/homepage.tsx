@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet";
+import { SocialIcon } from "react-social-icons";
 import "./homepage.css";
 
 function Avatar() {
@@ -19,7 +20,10 @@ export default function Homepage() {
             <div className="intro">
                 <p>Frontend Web Developer based out of Oakland.</p>
                 <p>Interested in AI, languages, books, and cats.</p>
-                <p>Open the drawer on the right to see my projects!</p>
+                <div className="socials">
+                    <SocialIcon fgColor="white" url="https://github.com/PGrad" />
+                    <SocialIcon fgColor="white" url="https://www.linkedin.com/in/paulgrad3/" />
+                </div>
             </div>
         </div>
     )

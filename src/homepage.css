@@ -18,4 +18,20 @@
 
 .intro {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.socials {
+    display: flex;
+    column-gap: 5px;
+    justify-self: center;
+    max-width: fit-content;
+}
+
+.social {
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
 }

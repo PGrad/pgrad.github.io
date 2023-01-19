@@ -3,16 +3,26 @@
     flex-direction: row;
 }
 
-.category {
-    margin-left: .5em;
-}
-
 .category-title {
-    margin-bottom: 0;
+    margin: .1em 0 0 0;
+    text-align: center;
 }
 
 .bare-link {
     text-decoration: none;
+}
+
+.item {
+    border-radius: 1.5px;
+    text-align: center;
+}
+
+.link {
+    margin: 0 .5em 0 .5em;
+}
+
+.not-sel-item {
+    background-color: inherit;
 }
 
 @media(prefers-color-scheme: light) {

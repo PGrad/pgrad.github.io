@@ -17,7 +17,7 @@ import Homepage from './homepage';
 import Host from './Host';
 import "./App.css";
 import { createTheme, Theme, useMediaQuery } from '@mui/material';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { ThemeProvider } from '@emotion/react';
 
 const drawerWidth = 240;
@@ -76,11 +76,13 @@ const categories = [
     "projects": [
       {
         "name": "QR Code",
-        "link": "QR-Component-FM"
+        "link": "QR-Component-FM",
+        "idx": 0
       },
       {
         "name": "Product Preview",
-        "link": "Product-Preview-FM"
+        "link": "Product-Preview-FM",
+        "idx": 1
       }
     ]
   },
@@ -89,7 +91,8 @@ const categories = [
     "projects": [
       {
         "name": "Bubbles and Glass",
-        "link": "CS114_Final"
+        "link": "CS114_Final",
+        "idx": 2
       }
     ]
   }
@@ -105,7 +108,8 @@ function App() {
         mode: prefersDarkMode ? "dark" : "light"
       }
     }), [prefersDarkMode]);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
+  const [selectedProject, setSelectedProject] = useState(-1);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -121,8 +125,17 @@ function App() {
       rgba(${endClr[0]},${endClr[1]},${endClr[2]},${endClr[3]}) 100%)`;
   };
 
-  const lightBkgd: string = radialString([0, 221, 225, 1], [1, 79, 82, 0.73]);
+  const lightBkgd: string = radialString([0, 221, 225, .5], [1, 79, 82, .2]);
   const darkBkgd: string = radialString([255, 113, 0, 1], [82, 34, 1, 1]);
+
+  const setSelectedFactory = (idx: number) => {
+    return () => {
+      setSelectedProject(idx);
+    };
+  };
+
+  const isSelected = (idx: number) => 
+    selectedProject === idx;
 
   return (
     <ThemeProvider theme={theme}>
@@ -132,7 +145,13 @@ function App() {
           <AppBar position="fixed" open={open}>
             <Toolbar sx={{ backgroundColor: prefersDarkMode ? "black" : "white" }}>
               <Typography variant="h6" noWrap sx={{ flexGrow: 1 }} component="div">
-                <Link className='bare-link' to={"/"}>Paul's Projects</Link>
+                <Link 
+                  onClick={setSelectedFactory(-1)}
+                  className='bare-link' 
+                  to={"/"}
+                >
+                  Paul's Projects
+                </Link>
               </Typography>
               <IconButton
                 aria-label="open drawer"
@@ -177,10 +196,16 @@ function App() {
             {categories.map((category) => (
               <div className='category'>
                 <h3 className='category-title'>{category["name"]}</h3>
+                <Divider variant='middle' />
                 <List>
-                  {category["projects"].map((project, idx) => (
-                    <ListItem key={idx} disablePadding>
-                      <Link to={`${project["link"]}/`}>{project["name"]}</Link>
+                  {category["projects"].map((project) => (
+                    <ListItem 
+                      key={project["idx"]}
+                      onClick={setSelectedFactory(project["idx"])}
+                      className={`item ${isSelected(project["idx"]) ? "sel-item" : "not-sel-item"}`}
+                      disablePadding
+                    >
+                      <Link className="bare-link link" to={`${project["link"]}/`}>{project["name"]}</Link>
                     </ListItem>
                   ))}
                 </List>
