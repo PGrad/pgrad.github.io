@@ -203,16 +203,16 @@ function App() {
             {categories.map((category, idx) => (
               <div key={idx} className='category'>
                 <h3 className='category-title'>{category["name"]}</h3>
-                <Divider variant='middle' />
-                <List>
+                <Divider />
+                <List disablePadding dense>
                   {category["projects"].map((project) => (
                     <ListItem 
                       key={project["idx"]}
                       onClick={setSelectedFactory(project["idx"])}
-                      className={`item ${isSelected(project["idx"]) ? "sel-item" : "not-sel-item"}`}
+                      className={"item"}
                       disablePadding
                     >
-                      <Link className="bare-link link" to={`${project["link"]}/`}>{project["name"]}</Link>
+                      <Link className={`bare-link link ${isSelected(project["idx"]) ? "sel-link" : "not-sel-link"}`} to={`${project["link"]}/`}>{project["name"]}</Link>
                     </ListItem>
                   ))}
                 </List>

@@ -17,24 +17,26 @@
 }
 
 .link {
-    margin: 0 .5em 0 .5em;
+    padding: 0 .5em 0 .5em;
+}
+
+li > a {
+    width: 100%;
 }
 
 @media(prefers-color-scheme: light) {
-    .sel-item {
-        background: linear-gradient(90deg, rgba(200,200,200,0.73) 0%, rgba(255,255,255,1) 100%);
-        border: .5px inset black;
+    .sel-link {
+        background-color: rgba(0, 0, 0, .1);
     }
 }
 
 @media(prefers-color-scheme: dark) {
-    .sel-item {
-        background: linear-gradient(90deg, rgba(56,56,56,0.73) 0%, rgba(0,0,0,1) 100%);
-        border: .5px outset white;
+    .sel-link {
+        background-color: rgb(255, 255, 255, .1);
     }
 }
 
-.not-sel-item {
+.not-sel-link {
     background-color: inherit;
 }
 
