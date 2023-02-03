@@ -8,6 +8,10 @@
     text-align: center;
 }
 
+.project-links {
+    display: flex;
+}
+
 .bare-link {
     text-decoration: none;
 }

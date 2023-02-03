@@ -102,6 +102,7 @@ type RGBA = [number, number, number, number];
 
 function App() {
   const prefersDarkMode: boolean = useMediaQuery("(prefers-color-scheme: dark)");
+  const isDesktop: boolean = useMediaQuery("(min-width: 800px)");
   const theme: Theme = useMemo(() =>
     createTheme({
       palette: {
@@ -141,6 +142,13 @@ function App() {
     };
   };
 
+  const onlyProjects = () => {
+    const projects = [];
+    for (const cat of categories)
+      projects.push(...cat["projects"]);
+    return projects;
+  };
+
   const isSelected = (idx: number) => 
     selectedProject === idx;
 
@@ -150,8 +158,8 @@ function App() {
         <Box sx={{ display: 'flex', height: "100vh" }}>
           <CssBaseline />
           <AppBar position="fixed" open={open}>
-            <Toolbar sx={{ backgroundColor: prefersDarkMode ? "black" : "white" }}>
-              <Typography variant="h6" noWrap sx={{ flexGrow: 1 }} component="div">
+            <Toolbar sx={{ backgroundColor: prefersDarkMode ? "black" : "white", width: "100vw" }}>
+              <Typography variant="h6" noWrap sx={{ flexGrow: 1, display: "flex", justifyContent: "space-between" }} component="div">
                 <Link 
                   onClick={setSelectedFactory(-1)}
                   className='bare-link' 
@@ -159,7 +167,13 @@ function App() {
                 >
                   Paul's Projects
                 </Link>
+                <div className='project-links'>
+                  {isDesktop ? onlyProjects().map((project, idx) =>
+                    <Link className={`bare-link link ${isSelected(idx) ? "sel-link" : "not-sel-link"}`} to={`${project["link"]}/`}>{project["name"]}</Link>
+                  ) : ""}
+                </div>
               </Typography>
+              { !isDesktop ?
               <IconButton
                 aria-label="open drawer"
                 edge="end"
@@ -167,7 +181,7 @@ function App() {
                 sx={{ ...(open && { display: 'none' }) }}
               >
                 <MenuIcon />
-              </IconButton>
+              </IconButton> : ""}
             </Toolbar>
           </AppBar>
           <Main open={open} sx={{ 
@@ -182,6 +196,7 @@ function App() {
               <Route path='/:project' element={<Host />}/>
             </Routes>
           </Main>
+          { !isDesktop ?
           <Drawer
             sx={{
               width: drawerWidth,
@@ -219,7 +234,7 @@ function App() {
                 <Divider />
               </div>
             ))}
-          </Drawer>
+          </Drawer>: ""}
         </Box>
       </HashRouter>
     </ThemeProvider>
