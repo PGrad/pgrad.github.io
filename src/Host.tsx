@@ -4,7 +4,6 @@ import "./Host.css";
 
 export default function Host() {
     const { project } = useParams();
-    console.log(project)
     return (
         <Iframe className="host" url={`https://pgrad.github.io/${project!}`} width="100%" height='100%' />
     )

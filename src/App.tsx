@@ -169,7 +169,7 @@ function App() {
                 </Link>
                 <div className='project-links'>
                   {isDesktop ? onlyProjects().map((project, idx) =>
-                    <Link className={`bare-link link ${isSelected(idx) ? "sel-link" : "not-sel-link"}`} to={`${project["link"]}/`}>{project["name"]}</Link>
+                    <Link onClick={setSelectedFactory(idx)} className={`bare-link link ${isSelected(idx) ? "sel-link" : "not-sel-link"}`} to={`${project["link"]}/`}>{project["name"]}</Link>
                   ) : ""}
                 </div>
               </Typography>
