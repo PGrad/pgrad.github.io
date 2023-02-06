@@ -24,19 +24,27 @@
     padding: 0 .5em 0 .5em;
 }
 
-li > a {
+li a {
     width: 100%;
 }
 
 @media(prefers-color-scheme: light) {
     .sel-link {
+        background-color: rgba(0, 221, 225, .5);
+    }
+    
+    .not-sel-link:hover {
         background-color: rgba(0, 0, 0, .1);
     }
 }
 
 @media(prefers-color-scheme: dark) {
     .sel-link {
-        background-color: rgb(255, 255, 255, .1);
+        background-color: rgba(255, 113, 0, 1);
+    }
+
+    .not-sel-link:hover {
+        background-color: rgba(255, 255, 255, .1);
     }
 }
 
