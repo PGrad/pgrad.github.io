@@ -51,9 +51,15 @@
     }
 }
 
+@media (max-width: 800px) {
+    .img-block {
+        flex-direction: column;
+    }
+}
+
 .img-block {
     display: flex;
-    column-gap: 5em;
+    gap: 5em;
     padding: 5em;
     text-align: left;
     background-color: black;
