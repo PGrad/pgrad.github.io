@@ -215,6 +215,9 @@ function App() {
             justifyContent: "center",
             background: prefersDarkMode ?
               darkBkgd : lightBkgd,
+            // Use the styling from the styled component.
+            margin: isDesktop ? 0 : "",
+            overflowY: "auto"
           }}>
             <Routes>
               <Route path='/' element={<Homepage />}/>

@@ -3,7 +3,8 @@
     flex-direction: column;
     padding-top: 5em;
     text-align: center;
-    margin: 0 5em;
+    margin: 0 2em;
+    overflow-y: auto;
 }
 
 .project-block {
@@ -17,7 +18,6 @@
 }
 
 .project-desc {
-    max-width: 25em;
     text-align: center;
     align-self: center;
 }
@@ -32,17 +32,27 @@
 .project-image {
     display: inline-block;
     align-self: center;
+    max-width: 15em
 }
 
 .img-description {
-    max-width: 25em;
     min-width: 10em;
+    max-width: 20em;
 }
 
 .project-imgs {
     display: flex;
+    align-content: center;
+    justify-content: center;
     list-style-type: none;
+    flex-wrap: wrap;
     gap: 5em;
+}
+
+@media (min-width: 1300px) and (max-width: 1800px) {
+    .img-block {
+        flex-direction: column;
+    }
 }
 
 @media (max-width: 1300px) {
@@ -51,7 +61,16 @@
     }
 }
 
+@media (min-width: 800px) and (max-width: 1300px) {
+    .img-block {
+        flex-direction: row;
+    }
+}
+
 @media (max-width: 800px) {
+    .work {
+        margin: auto;
+    }
     .img-block {
         flex-direction: column;
     }
@@ -69,4 +88,6 @@
     padding: 5em;
     text-align: left;
     background-color: black;
+    border-radius: 5em;
+    width: fit-content;
 }
