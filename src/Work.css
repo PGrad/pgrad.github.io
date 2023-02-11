@@ -55,6 +55,12 @@
     .img-block {
         flex-direction: column;
     }
+    .project-heading {
+        font-size: 1.5em;
+    }
+    .project-desc {
+        max-width: 20em;
+    }
 }
 
 .img-block {

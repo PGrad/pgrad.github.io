@@ -215,7 +215,6 @@ function App() {
             justifyContent: "center",
             background: prefersDarkMode ?
               darkBkgd : lightBkgd,
-            overflow: "auto"
           }}>
             <Routes>
               <Route path='/' element={<Homepage />}/>
