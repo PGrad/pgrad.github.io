@@ -15,16 +15,16 @@ function Avatar() {
 
 export default function Homepage() {
     return (
-        <div className="homepage">
+        <section className="homepage">
             <Avatar />
-            <div className="intro">
+            <section className="intro">
                 <p>Frontend Web Developer based out of Oakland.</p>
                 <p>Interested in AI, languages, books, and cats.</p>
                 <div className="socials">
                     <SocialIcon fgColor="white" url="https://github.com/PGrad" />
                     <SocialIcon fgColor="white" url="https://www.linkedin.com/in/paulgrad3/" />
                 </div>
-            </div>
-        </div>
+            </section>
+        </section>
     )
 }

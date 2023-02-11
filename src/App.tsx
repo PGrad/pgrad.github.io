@@ -19,6 +19,7 @@ import "./App.css";
 import { createTheme, Theme, useMediaQuery } from '@mui/material';
 import { useEffect, useMemo, useState } from 'react';
 import { ThemeProvider } from '@emotion/react';
+import Work from './Work';
 
 const drawerWidth = 240;
 
@@ -72,17 +73,27 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 const categories = [
   {
+    "name": "Work Experience",
+    "projects": [
+      {
+        "name": "AutoCAD Trace",
+        "link": "work",
+        "idx": 0
+      },
+    ]
+  },
+  {
     "name": "Frontend Mentor",
     "projects": [
       {
         "name": "QR Code",
-        "link": "QR-Component-FM",
-        "idx": 0
+        "link": "project/QR-Component-FM",
+        "idx": 1
       },
       {
         "name": "Product Preview",
-        "link": "Product-Preview-FM",
-        "idx": 1
+        "link": "project/Product-Preview-FM",
+        "idx": 2
       }
     ]
   },
@@ -91,8 +102,8 @@ const categories = [
     "projects": [
       {
         "name": "Bubbles and Glass",
-        "link": "CS114_Final",
-        "idx": 2
+        "link": "project/CS114_Final",
+        "idx": 3
       }
     ]
   }
@@ -158,7 +169,11 @@ function App() {
         <Box sx={{ display: 'flex', height: "100vh" }}>
           <CssBaseline />
           <AppBar position="fixed" open={open}>
-            <Toolbar sx={{ backgroundColor: prefersDarkMode ? "black" : "white", width: "100vw" }}>
+            <Toolbar sx={{ 
+              backgroundColor: 
+                prefersDarkMode ? "black" : "white",
+              width: "100vw"
+            }}>
               <Typography variant="h6" noWrap sx={{ flexGrow: 1, display: "flex", justifyContent: "space-between" }} component="div">
                 <Link 
                   onClick={setSelectedFactory(-1)}
@@ -169,7 +184,18 @@ function App() {
                 </Link>
                 <div className='project-links'>
                   {isDesktop ? onlyProjects().map((project, idx) =>
-                    <Link onClick={setSelectedFactory(idx)} className={`bare-link link ${isSelected(idx) ? "sel-link" : "not-sel-link"}`} to={`${project["link"]}/`}>{project["name"]}</Link>
+                    <Link
+                      key={idx}
+                      onClick={setSelectedFactory(idx)}
+                      className={
+                        `bare-link
+                        link
+                        ${isSelected(idx) ? "sel-link" : "not-sel-link"}`
+                      }
+                      to={`${project["link"]}/`}
+                    >
+                      {project["name"]}
+                    </Link>
                   ) : ""}
                 </div>
               </Typography>
@@ -189,16 +215,17 @@ function App() {
             justifyContent: "center",
             background: prefersDarkMode ?
               darkBkgd : lightBkgd,
-            height: "100vh" 
+            overflow: "auto"
           }}>
             <Routes>
               <Route path='/' element={<Homepage />}/>
-              <Route path='/:project' element={<Host />}/>
+              <Route path='/work' element={<Work />}/>
+              <Route path='/project/:project' element={<Host />}/>
             </Routes>
           </Main>
-          { !isDesktop ?
           <Drawer
             sx={{
+              display: isDesktop ? "none" : "flex",
               width: drawerWidth,
               flexShrink: 0,
               '& .MuiDrawer-paper': {
@@ -234,7 +261,7 @@ function App() {
                 <Divider />
               </div>
             ))}
-          </Drawer>: ""}
+          </Drawer>
         </Box>
       </HashRouter>
     </ThemeProvider>
