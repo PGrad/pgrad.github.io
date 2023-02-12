@@ -6,6 +6,11 @@
     margin: 0 2em;
     overflow-y: auto;
     font-family: "Work Sans";
+    -ms-overflow-style: none;
+}
+
+.work::-webkit-scrollbar {
+    display: none;
 }
 
 .project-block {
@@ -35,7 +40,7 @@
 
 .project-image {
     display: inline-block;
-    align-self: center;
+    align-self: flex-start;
     max-width: 15em
 }
 
@@ -51,12 +56,6 @@
     list-style-type: none;
     flex-wrap: wrap;
     gap: 5em;
-}
-
-@media (min-width: 1300px) and (max-width: 1800px) {
-    .img-block {
-        flex-direction: column;
-    }
 }
 
 @media (max-width: 1300px) {
