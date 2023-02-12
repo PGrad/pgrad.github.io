@@ -120,7 +120,7 @@ function App() {
         mode: prefersDarkMode ? "dark" : "light"
       }
     }), [prefersDarkMode]);
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(() => {
     const initVal = localStorage.getItem("selected") || "-1";
     return Number(initVal);
