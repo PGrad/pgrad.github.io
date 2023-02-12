@@ -18,11 +18,13 @@ export default function Homepage() {
         <section className="homepage">
             <Avatar />
             <section className="intro">
-                <p>Frontend Web Developer based out of Oakland.</p>
-                <p>Interested in AI, languages, books, and cats.</p>
+                <div className="flavor-text">
+                    <p>Frontend Web Developer based out of Oakland, CA.</p>
+                    <p>Interested in AI, languages, books, and cats.</p>
+                </div>
                 <div className="socials">
-                    <SocialIcon fgColor="white" url="https://github.com/PGrad" />
-                    <SocialIcon fgColor="white" url="https://www.linkedin.com/in/paulgrad3/" />
+                    <SocialIcon className="icon" fgColor="white" url="https://github.com/PGrad" />
+                    <SocialIcon className="icon" fgColor="white" url="https://www.linkedin.com/in/paulgrad3/" />
                 </div>
             </section>
         </section>
