@@ -10,6 +10,8 @@
 
 .project-links {
     display: flex;
+    font-size: .9em;
+    align-items: center;
 }
 
 .bare-link {
