@@ -1,3 +1,27 @@
+.host-container {
+    width: 100vw;
+    height: 100vh;
+    padding-top: 3.5em;
+}
+
+@media (prefers-color-scheme: light) {
+    .host-container {
+        background-color: white;
+        color: black;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .host-container {
+        background-color: grey;
+        color: white;
+    }
+}
+
 .host {
     background-color: white;
+}
+
+.project-link {
+    text-align: center;
 }

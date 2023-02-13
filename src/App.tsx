@@ -83,17 +83,27 @@ const categories = [
     ]
   },
   {
+    "name": "AI Projects",
+    "projects": [
+      {
+        "name": "AI Teacher",
+        "link": "project/AI_Teacher",
+        "idx": 1
+      }
+    ]
+  },
+  {
     "name": "Frontend Mentor",
     "projects": [
       {
         "name": "QR Code",
         "link": "project/QR-Component-FM",
-        "idx": 1
+        "idx": 2
       },
       {
         "name": "Product Preview",
         "link": "project/Product-Preview-FM",
-        "idx": 2
+        "idx": 3
       }
     ]
   },
@@ -103,7 +113,7 @@ const categories = [
       {
         "name": "Bubbles and Glass",
         "link": "project/CS114_Final",
-        "idx": 3
+        "idx": 4
       }
     ]
   }

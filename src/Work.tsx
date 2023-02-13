@@ -64,8 +64,8 @@ function Project(props: ProjectProps) {
                     <li className="img-block" key={idx}>
                         <img className="project-image" src={img.src} alt={img.alt} />
                         <div className="img-description">
-                            {img.description.map((desc) => (
-                                <p className="img-paragraph">{desc}</p>
+                            {img.description.map((desc, idx) => (
+                                <p key={idx} className="img-paragraph">{desc}</p>
                             ))}
                         </div>
                     </li>
