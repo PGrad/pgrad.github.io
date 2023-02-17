@@ -22,7 +22,8 @@ export default function Homepage() {
                     <p>Frontend Web Developer based out of Oakland, CA.</p>
                     <p>Interested in AI, languages, books, and cats.</p>
                 </div>
-                <div className="socials">
+                <a className="resume fade-in" href="https://bit.ly/3Z0H3PK">Resumé</a>
+                <div className="socials fade-in">
                     <SocialIcon className="icon" fgColor="white" url="https://github.com/PGrad" />
                     <SocialIcon className="icon" fgColor="white" url="https://www.linkedin.com/in/paulgrad3/" />
                 </div>

@@ -63,11 +63,48 @@ p {
     max-width: fit-content;
 }
 
-@keyframes hello {
-    from { transform: scale(1) };
-    to { transform: scale(-1, 1) };
-}
-
 .icon:hover {
     transform: scale(-1, 1);
+}
+
+@keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.fade-in {
+    animation: fade-in 2s ease-in 5s 1 backwards;
+}
+
+.resume {
+    margin-bottom: .5em;
+    padding: .2em .4em;
+    border-radius: .5em;
+    background-color: black;
+    color: inherit;
+    text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+    .resume {
+        background-color: black;
+        color: inherit;
+    }
+
+    .resume:hover {
+        background-color: white;
+        color: black;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    .resume {
+        background-color: white;
+        color: inherit;
+    }
+
+    .resume:hover {
+        background-color: black;
+        color: white;
+    }
 }

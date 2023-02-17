@@ -58,10 +58,16 @@ li a {
     .bare-link {
         color: black;
     }
+    .bare-link:hover {
+        color: blue;
+    }
 }
 
 @media(prefers-color-scheme: dark) {
     .bare-link {
         color: white;
+    }
+    .bare-link:hover {
+        color: red;
     }
 }
