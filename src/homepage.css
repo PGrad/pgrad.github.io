@@ -141,7 +141,7 @@ p {
     }
     .homepage {
         position: absolute;
-        top: 0;
+        top: 10em;
         z-index: 2;
     }
 }
