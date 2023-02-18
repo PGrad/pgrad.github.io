@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { SocialIcon } from "react-social-icons";
 import "./homepage.css";
 import * as THREE from "three";
