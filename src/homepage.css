@@ -1,6 +1,6 @@
 :root {
     --anim-duration: 3s;
-    --anim-delay: 3s;
+    --anim-delay: 1s;
 }
 
 .homepage {
@@ -73,7 +73,7 @@ p {
 }
 
 .fade-in {
-    animation: fade-in 2s ease-in 5s 1 backwards;
+    animation: fade-in 2s ease-in calc(var(--anim-duration) + var(--anim-delay)) 1 backwards;
 }
 
 .resume {
@@ -83,6 +83,7 @@ p {
     background-color: black;
     color: inherit;
     text-decoration: none;
+    font-size: 1.1em;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -112,6 +113,9 @@ p {
 @media (max-width: 800px) {
     .homepage {
         font-size: .8em;
+    }
+    .resume {
+        font-size: .9em;
     }
 }
 
