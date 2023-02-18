@@ -108,3 +108,19 @@ p {
         color: white;
     }
 }
+
+#homepage-main {
+    display: flex;
+    place-items: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+}
+
+.canvas {
+    border-radius: .5em;
+}
+
+.homepage {
+    margin: 10em 0 2em 0;
+}
