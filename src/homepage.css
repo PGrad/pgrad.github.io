@@ -125,17 +125,28 @@ p {
     flex-direction: column;
     width: 100vw;
     height: 100vh;
-    overflow: hidden;
 }
 
 @media (max-width: 800px) {
-    .canvas {
+    #homepage-main {
+        overflow: hidden;
+    }
+
+    #canvas {
+        position: absolute;
+        top: 0;
+        z-index: 1;
         width: 100vw;
         height: 100vh;
     }
+    .homepage {
+        position: absolute;
+        top: 0;
+        z-index: 2;
+    }
 }
 
-.canvas {
+#canvas {
     border-radius: .5em;
 }
 

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { SocialIcon } from "react-social-icons";
 import "./homepage.css";
 import * as THREE from "three";
@@ -15,14 +15,17 @@ function Avatar() {
 export default function Homepage() {
     const isDesktop: boolean = useMediaQuery("(min-width: 800px)");
     useEffect(() => {
-        if (document.getElementsByClassName("canvas").length > 0)
-            return; // So strict mode doesn't add the canvas twice.
+        const homepage = document.getElementById("homepage-main")!;
+        const canvas = document.getElementById("canvas");
+        if (canvas) {
+            homepage.removeChild(canvas);
+        }
 
         const scene = new THREE.Scene();
         const renderer = new THREE.WebGLRenderer();
         const camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
 
-        const geometry = new THREE.SphereGeometry(isDesktop ? 10 : 7, 32, 16);
+        const geometry = new THREE.SphereGeometry(10, 32, 16);
         const loader = new THREE.TextureLoader();
 
         const fr = isDesktop ? .3 : 1;
@@ -30,8 +33,7 @@ export default function Homepage() {
             Math.round(window.innerWidth * fr),
             Math.round(window.innerHeight * fr)
         );
-        renderer.domElement.className = "canvas fade-in";
-        const homepage = document.getElementById("homepage-main")!;
+        renderer.domElement.id = "canvas";
         homepage.appendChild( renderer.domElement );
 
         let material = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
