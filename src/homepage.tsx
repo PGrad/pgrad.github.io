@@ -12,21 +12,24 @@ function Avatar() {
 }
 
 export default function Homepage() {
-    let renderer = new THREE.WebGLRenderer();
 
     useEffect(() => {
+        if (document.getElementsByClassName("canvas").length > 0)
+            return; // So strict mode doesn't add the canvas twice.
+
         const scene = new THREE.Scene();
+        const renderer = new THREE.WebGLRenderer();
         const camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+
+        const geometry = new THREE.SphereGeometry(10, 32, 16);
+        const loader = new THREE.TextureLoader();
 
         renderer.setSize( Math.round(window.innerWidth * .3), Math.round(window.innerHeight * .3) );
         renderer.domElement.className = "canvas fade-in";
         const homepage = document.getElementById("homepage-main")!;
         homepage.appendChild( renderer.domElement );
 
-        const geometry = new THREE.SphereGeometry(10, 32, 16);
         let material = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
-
-        const loader = new THREE.TextureLoader();
 
         let sphere: THREE.Mesh | null = null;
         loader.load("./mars_texture.png",
@@ -40,7 +43,7 @@ export default function Homepage() {
 
         camera.position.z = 20;
 
-        let animate = () => {
+        const animate = () => {
             requestAnimationFrame( animate );
 
             if (sphere) {
@@ -52,7 +55,7 @@ export default function Homepage() {
         };
 
         animate();
-    }, [])
+    }, []);
     return (
         <main id="homepage-main" >
             <section className="homepage">
