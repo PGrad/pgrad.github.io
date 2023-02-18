@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { SocialIcon } from "react-social-icons";
 import "./homepage.css";
 import * as THREE from "three";
+import { useMediaQuery } from "@mui/material";
 
 function Avatar() {
     return (
@@ -12,7 +13,7 @@ function Avatar() {
 }
 
 export default function Homepage() {
-
+    const isDesktop: boolean = useMediaQuery("(min-width: 800px)");
     useEffect(() => {
         if (document.getElementsByClassName("canvas").length > 0)
             return; // So strict mode doesn't add the canvas twice.
@@ -21,10 +22,14 @@ export default function Homepage() {
         const renderer = new THREE.WebGLRenderer();
         const camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
 
-        const geometry = new THREE.SphereGeometry(10, 32, 16);
+        const geometry = new THREE.SphereGeometry(isDesktop ? 10 : 7, 32, 16);
         const loader = new THREE.TextureLoader();
 
-        renderer.setSize( Math.round(window.innerWidth * .3), Math.round(window.innerHeight * .3) );
+        const fr = isDesktop ? .3 : .4;
+        renderer.setSize( 
+            Math.round(window.innerWidth * fr),
+            Math.round(window.innerHeight * fr)
+        );
         renderer.domElement.className = "canvas fade-in";
         const homepage = document.getElementById("homepage-main")!;
         homepage.appendChild( renderer.domElement );
