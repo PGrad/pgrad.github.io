@@ -60,7 +60,7 @@ export default function Homepage() {
         };
 
         animate();
-    }, []);
+    }, [isDesktop]);
     return (
         <main id="homepage-main" >
             <section className="homepage">
