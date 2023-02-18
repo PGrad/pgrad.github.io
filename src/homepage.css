@@ -109,6 +109,12 @@ p {
     }
 }
 
+@media (max-width: 800px) {
+    .homepage {
+        font-size: .8em;
+    }
+}
+
 #homepage-main {
     display: flex;
     place-items: center;
