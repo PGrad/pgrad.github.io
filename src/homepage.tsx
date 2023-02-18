@@ -25,7 +25,7 @@ export default function Homepage() {
         const geometry = new THREE.SphereGeometry(isDesktop ? 10 : 7, 32, 16);
         const loader = new THREE.TextureLoader();
 
-        const fr = isDesktop ? .3 : .4;
+        const fr = isDesktop ? .3 : 1;
         renderer.setSize( 
             Math.round(window.innerWidth * fr),
             Math.round(window.innerHeight * fr)
