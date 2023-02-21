@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { SocialIcon } from "react-social-icons";
 import "./homepage.css";
 import * as THREE from "three";
-import { useMediaQuery } from "@mui/material";
 
 function Avatar() {
     return (
@@ -18,25 +17,25 @@ export default function Homepage() {
         height: 0
     });
 
-    let timeout: number | null = null;
-
-    // Debounce the resize event so it's
-    // not flickering like crazy.
-    const onresize = () => {
-        if (timeout)
-            window.clearTimeout(timeout!);
-
-	timeout = window.setTimeout(() => {
-	    setDimensions({
-	        width: window.innerWidth,
-	        height: window.innerHeight
-	    });
-	    window.clearTimeout(timeout!);
-            timeout = null;
-	}, 50);
-    };
-
     useEffect(() => {
+    	let timeout: number | null = null;
+
+	// Debounce the resize event so it's
+	// not flickering like crazy.
+	const onresize = () => {
+		if (timeout)
+		window.clearTimeout(timeout!);
+
+		timeout = window.setTimeout(() => {
+		setDimensions({
+			width: window.innerWidth,
+			height: window.innerHeight
+		});
+		window.clearTimeout(timeout!);
+		timeout = null;
+		}, 50);
+	};
+
         // If first time called.
 	if (dimensions.width === 0) {
             onresize();
