@@ -3,6 +3,10 @@
     --anim-delay: 1s;
 }
 
+body {
+    background-color: black;
+}
+
 .homepage {
     display: flex;
     flex-direction: column;
@@ -125,31 +129,21 @@ p {
     flex-direction: column;
     width: 100vw;
     height: 100vh;
-}
-
-@media (max-width: 800px) {
-    #homepage-main {
-        overflow: hidden;
-    }
-
-    #canvas {
-        position: absolute;
-        top: 0;
-        z-index: 1;
-        width: 100vw;
-        height: 100vh;
-    }
-    .homepage {
-        position: absolute;
-        top: 10%;
-        z-index: 2;
-    }
+    overflow: hidden;
 }
 
 #canvas {
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    width: 100vw;
+    height: 100vh;
     border-radius: .5em;
 }
 
 .homepage {
+    position: absolute;
+    top: 10%;
+    z-index: 2;
     margin: 10em 0 2em 0;
 }

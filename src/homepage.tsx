@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { SocialIcon } from "react-social-icons";
 import "./homepage.css";
 import * as THREE from "three";
@@ -13,8 +13,36 @@ function Avatar() {
 }
 
 export default function Homepage() {
-    const isDesktop: boolean = useMediaQuery("(min-width: 800px)");
+    let [dimensions, setDimensions] = useState({
+        width: 0,
+        height: 0
+    });
+
+    let timeout: number | null = null;
+
+    // Debounce the resize event so it's
+    // not flickering like crazy.
+    const onresize = () => {
+        if (timeout)
+            window.clearTimeout(timeout!);
+
+	timeout = window.setTimeout(() => {
+	    setDimensions({
+	        width: window.innerWidth,
+	        height: window.innerHeight
+	    });
+	    window.clearTimeout(timeout!);
+            timeout = null;
+	}, 50);
+    };
+
     useEffect(() => {
+        // If first time called.
+	if (dimensions.width === 0) {
+            onresize();
+            return;
+        }
+
         const homepage = document.getElementById("homepage-main")!;
         const canvas = document.getElementById("canvas");
         if (canvas) {
@@ -28,10 +56,9 @@ export default function Homepage() {
         const geometry = new THREE.SphereGeometry(10, 32, 16);
         const loader = new THREE.TextureLoader();
 
-        const fr = isDesktop ? .3 : 1;
         renderer.setSize( 
-            Math.round(window.innerWidth * fr),
-            Math.round(window.innerHeight * fr)
+            Math.round(dimensions.width),
+            Math.round(dimensions.height)
         );
         renderer.domElement.id = "canvas";
         homepage.appendChild( renderer.domElement );
@@ -62,7 +89,11 @@ export default function Homepage() {
         };
 
         animate();
-    }, [isDesktop]);
+
+        window.addEventListener("resize", onresize);
+
+        return () => window.removeEventListener("resize", onresize);
+    }, [dimensions]);
     return (
         <main id="homepage-main" >
             <section className="homepage">
