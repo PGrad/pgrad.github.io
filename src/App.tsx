@@ -190,7 +190,7 @@ function App() {
                   className='bare-link' 
                   to={"/"}
                 >
-                  Paul's Projects
+                  Paul&apos;s Projects
                 </Link>
                 <div className='project-links'>
                   {isDesktop ? onlyProjects().map((project, idx) =>
