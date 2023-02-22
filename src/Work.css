@@ -88,6 +88,7 @@
     }
     .img-block {
         flex-direction: column;
+        padding: 4em;
     }
     .project-heading {
         font-size: 1.5em;
