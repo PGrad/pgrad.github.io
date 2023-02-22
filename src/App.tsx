@@ -151,11 +151,11 @@ function App() {
   const radialString = (startClr: RGBA, endClr: RGBA) => {
     return `radial-gradient(circle,
       rgba(${startClr[0]},${startClr[1]},${startClr[2]},${startClr[3]}) 0%,
-      rgba(${endClr[0]},${endClr[1]},${endClr[2]},${endClr[3]}) 100%)`;
+      rgba(${endClr[0]},${endClr[1]},${endClr[2]},${endClr[3]}) 50%)`;
   };
 
-  const lightBkgd: string = radialString([0, 221, 225, .5], [1, 79, 82, .2]);
-  const darkBkgd: string = radialString([255, 113, 0, 1], [82, 34, 1, 1]);
+  const lightBkgd: string = radialString([1, 79, 82, .5], [0, 221, 225, .2]);
+  const darkBkgd: string = radialString([255, 113, 0, 1], [0, 0, 0, 1]);
 
   const setSelectedFactory = (idx: number) => {
     return () => {

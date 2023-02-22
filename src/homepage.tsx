@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { SocialIcon } from "react-social-icons";
 import "./homepage.css";
 import * as THREE from "three";
+import { useMediaQuery } from "@mui/material";
 
 function Avatar() {
     return (
@@ -17,6 +18,8 @@ export default function Homepage() {
         height: 0
     });
 
+    const useDarkTheme = useMediaQuery("(prefers-color-scheme: dark)");
+
     useEffect(() => {
     	let timeout: number | null = null;
 
@@ -24,16 +27,16 @@ export default function Homepage() {
 	// not flickering like crazy.
 	const onresize = () => {
 		if (timeout)
-		window.clearTimeout(timeout!);
+		    window.clearTimeout(timeout!);
 
 		timeout = window.setTimeout(() => {
-		setDimensions({
-			width: window.innerWidth,
-			height: window.innerHeight
-		});
-		window.clearTimeout(timeout!);
-		timeout = null;
-		}, 50);
+            setDimensions({
+                width: window.innerWidth,
+                height: window.innerHeight
+            });
+            window.clearTimeout(timeout!);
+            timeout = null;
+		}, 100);
 	};
 
         // If first time called.
@@ -49,7 +52,8 @@ export default function Homepage() {
         }
 
         const scene = new THREE.Scene();
-        const renderer = new THREE.WebGLRenderer();
+        scene.background = null;
+        const renderer = new THREE.WebGLRenderer({ alpha: true });
         const camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
 
         const geometry = new THREE.SphereGeometry(10, 32, 16);
@@ -65,7 +69,9 @@ export default function Homepage() {
         let material = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
 
         let sphere: THREE.Mesh | null = null;
-        loader.load("./mars_texture.png",
+        loader.load(useDarkTheme ?
+            "./mars_texture.png" :
+            "./moon_texture.jpg",
             (texture) => {
                 material = new THREE.MeshBasicMaterial({
                     map: texture
@@ -92,7 +98,7 @@ export default function Homepage() {
         window.addEventListener("resize", onresize);
 
         return () => window.removeEventListener("resize", onresize);
-    }, [dimensions]);
+    }, [dimensions, useDarkTheme]);
     return (
         <main id="homepage-main" >
             <section className="homepage">
