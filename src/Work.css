@@ -73,6 +73,12 @@
 @media (min-width: 800px) {
     .img-block {
         font-size: 1.1em;
+        /* 
+            The lava lamp animation looks bad on mobile. 
+            The text is constantly shifting as the
+            container changes in size.
+        */
+        animation: lava-lamp 5s ease-in-out 0s infinite alternate;
     }
 }
 
@@ -92,7 +98,7 @@
 }
 
 @media (prefers-color-scheme: light) {
-    @keyframes pulse {
+    @keyframes lava-lamp {
         from { 
             filter: drop-shadow(0 0 1em cyan);
             padding: 4em;
@@ -114,14 +120,12 @@
     }
     .img-block {
         background-color:peachpuff;
-        animation-name: pulse-halo;
-        animation-duration: 5s;
         color: darkgreen;
     }
 }
 
 @media (prefers-color-scheme: dark) {
-    @keyframes pulse {
+    @keyframes lava-lamp {
         from { 
             filter: drop-shadow(0 0 1em orange);
             padding: 4em;
@@ -152,7 +156,6 @@
     text-align: left;
     border-radius: 5em;
     width: fit-content;
-    animation: pulse 5s ease-in-out 0s infinite alternate;
 }
 
 .img-block:hover:nth-child(1) {
