@@ -30,7 +30,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "eslint": ""
   },
   "eslintConfig": {
     "extends": [
@@ -52,6 +53,11 @@
   },
   "devDependencies": {
     "@types/react-helmet": "^6.1.6",
-    "@types/three": "^0.149.0"
+    "@types/three": "^0.149.0",
+    "@typescript-eslint/eslint-plugin": "^5.53.0",
+    "@typescript-eslint/parser": "^5.53.0",
+    "eslint": "^8.34.0",
+    "eslint-plugin-react": "^7.32.2",
+    "husky": "^8.0.3"
   }
 }

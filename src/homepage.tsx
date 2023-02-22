@@ -13,7 +13,7 @@ function Avatar() {
 }
 
 export default function Homepage() {
-    let [dimensions, setDimensions] = useState({
+    const [dimensions, setDimensions] = useState({
         width: 0,
         height: 0
     });
@@ -21,31 +21,36 @@ export default function Homepage() {
     const useDarkTheme = useMediaQuery("(prefers-color-scheme: dark)");
 
     useEffect(() => {
-    	let timeout: number | null = null;
+        let timeout: number | null = null;
 
-	// Debounce the resize event so it's
-	// not flickering like crazy.
-	const onresize = () => {
-		if (timeout)
-		    window.clearTimeout(timeout!);
+        // Debounce the resize event so it's
+        // not flickering like crazy.
+        const onresize = () => {
+            if (timeout)
+                window.clearTimeout(timeout);
 
-		timeout = window.setTimeout(() => {
-            setDimensions({
-                width: window.innerWidth,
-                height: window.innerHeight
-            });
-            window.clearTimeout(timeout!);
-            timeout = null;
-		}, 100);
-	};
+            timeout = window.setTimeout(() => {
+                setDimensions({
+                    width: window.innerWidth,
+                    height: window.innerHeight
+                });
 
-        // If first time called.
-	if (dimensions.width === 0) {
+                if (timeout) {
+                    window.clearTimeout(timeout);
+                    timeout = null;
+                }
+            }, 100);
+        };
+
+            // If first time called.
+        if (dimensions.width === 0) {
             onresize();
             return;
         }
 
-        const homepage = document.getElementById("homepage-main")!;
+        const homepage = document.getElementById("homepage-main");
+        if (!homepage)
+            return;
         const canvas = document.getElementById("canvas");
         if (canvas) {
             homepage.removeChild(canvas);
