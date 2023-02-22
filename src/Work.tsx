@@ -53,14 +53,14 @@ const projects: ProjectProps[] = [
     }
 ];
 
-function Project(props: ProjectProps) {
+function Project({ title, dates, images, description }: ProjectProps) {
     return (
         <section className="project-block">
-            <h1 className="project-heading">{props.title}</h1>
-            <p className="project-dates">{props.dates}</p>
-            <p className="project-desc">{props.description}</p>
+            <h1 className="project-heading">{title}</h1>
+            <p className="project-dates">{dates}</p>
+            <p className="project-desc">{description}</p>
             <ul className="project-imgs">
-                {props.images.map((img, idx) => (
+                {images.map((img, idx) => (
                     <li className="img-block" key={idx}>
                         <img className="project-image" src={img.src} alt={img.alt} />
                         <div className="img-description">
