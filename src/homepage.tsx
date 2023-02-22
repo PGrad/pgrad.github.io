@@ -75,6 +75,7 @@ export default function Homepage() {
 
         let sphere: THREE.Mesh | null = null;
         loader.load(useDarkTheme ?
+            // Credit to NASA
             "./mars_texture.png" :
             "./moon_texture.jpg",
             (texture) => {

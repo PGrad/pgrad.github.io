@@ -27,7 +27,7 @@ const projects: ProjectProps[] = [
                     Each trace shows the avatars of collaborators, the trace name,
                     and date of last modification.`,
                     `When hovering over a trace, you can see a tooltip with additional
-                    information.`
+                    information. Image credit to CADnotes.`
                 ]
             },
             {
@@ -41,7 +41,7 @@ const projects: ProjectProps[] = [
                     model which I also worked on) into an AutoCAD object.`,
                     `You are looking at one of the 3 dialogs I made. The dialog
                     follows Autodesk HIG (now Weave) design standards for icons,
-                    fonts, theming, and dimensions.`
+                    fonts, theming, and dimensions. Image credit to CADnotes.`
                 ]
             }
         ],
