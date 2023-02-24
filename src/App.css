@@ -58,7 +58,7 @@ li a {
     .bare-link {
         color: black;
     }
-    .bare-link:hover {
+    .not-sel-link:hover {
         color: blue;
     }
 }
@@ -67,7 +67,7 @@ li a {
     .bare-link {
         color: white;
     }
-    .bare-link:hover {
+    .not-sel-link:hover {
         color: red;
     }
 }
