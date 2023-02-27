@@ -187,10 +187,10 @@ function App() {
               <Typography variant="h6" noWrap sx={{ flexGrow: 1, display: "flex", justifyContent: "space-between" }} component="div">
                 <Link 
                   onClick={setSelectedFactory(-1)}
-                  className='bare-link' 
+                  className="bare-link title"
                   to={"/"}
                 >
-                  Paul&apos;s Projects
+                  { selectedProject == -1 ? "Paul's Projects" : "Home" }
                 </Link>
                 <div className='project-links'>
                   {isDesktop ? onlyProjects().map((project, idx) =>
@@ -227,7 +227,8 @@ function App() {
               darkBkgd : lightBkgd,
             // Use the styling from the styled component.
             margin: isDesktop ? 0 : "",
-            overflowY: "auto"
+            overflowY: "auto",
+            overflowX: "hidden"
           }}>
             <Routes>
               <Route path='/' element={<Homepage />}/>
@@ -256,7 +257,7 @@ function App() {
             <Divider />
             {categories.map((category, idx) => (
               <div key={idx} className='category'>
-                <h3 className='category-title'>{category["name"]}</h3>
+                <h3 className='category-title title'>{category["name"]}</h3>
                 <Divider />
                 <List disablePadding dense>
                   {category["projects"].map((project) => (
