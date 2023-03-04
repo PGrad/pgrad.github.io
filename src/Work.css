@@ -58,6 +58,11 @@
     gap: 5em;
 }
 
+.checkbox {
+    display: flex;
+    place-content: center;
+}
+
 @media (max-width: 1300px) {
     .project-imgs {
         flex-direction: column;
@@ -71,14 +76,19 @@
 }
 
 @media (min-width: 800px) {
-    .img-block {
-        font-size: 1.1em;
+    .animated {
         /* 
             The lava lamp animation looks bad on mobile. 
             The text is constantly shifting as the
             container changes in size.
         */
         animation: lava-lamp 5s ease-in-out 0s infinite alternate;
+    }
+    .non-animated {
+        padding: 4em;
+    }
+    .img-block {
+        font-size: 1.1em;
     }
 }
 

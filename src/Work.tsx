@@ -1,3 +1,5 @@
+import { Checkbox, useMediaQuery } from "@mui/material";
+import { useState } from "react";
 import "./Work.css"
 
 interface Image {
@@ -54,6 +56,11 @@ const projects: ProjectProps[] = [
 ];
 
 function Project({ title, dates, images, description }: ProjectProps) {
+    const [checked, setChecked] = useState(false);
+    const isDesktop: boolean = useMediaQuery("(min-width: 800px)");
+    const change = () => {
+        setChecked(!checked);
+    }
     return (
         <section className="project-block">
             <h1 className="project-heading">{title}</h1>
@@ -61,7 +68,7 @@ function Project({ title, dates, images, description }: ProjectProps) {
             <p className="project-desc">{description}</p>
             <ul className="project-imgs">
                 {images.map((img, idx) => (
-                    <li className="img-block" key={idx}>
+                    <li className={`img-block ${checked ? "animated" : "non-animated"}`} key={idx}>
                         <img className="project-image" src={img.src} alt={img.alt} />
                         <div className="img-description">
                             {img.description.map((desc, idx) => (
@@ -71,6 +78,14 @@ function Project({ title, dates, images, description }: ProjectProps) {
                     </li>
                 ))}
             </ul>
+            {
+                isDesktop ?
+                <span className="checkbox">
+                    <Checkbox checked={checked} onChange={change} />
+                    <p>Turn on lava lamp effect!</p>
+                </span>   :
+                ""
+            }
         </section>
     );
 }
