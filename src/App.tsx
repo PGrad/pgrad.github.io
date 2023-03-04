@@ -1,3 +1,5 @@
+import { useEffect, useMemo, useState } from 'react';
+import { ThemeProvider } from '@emotion/react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -12,13 +14,13 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
-import { HashRouter, Link, Route, Routes } from 'react-router-dom';
+import {
+  HashRouter, Link, Route, Routes,
+} from 'react-router-dom';
+import { createTheme, Theme, useMediaQuery } from '@mui/material';
 import Homepage from './homepage';
 import Host from './Host';
-import "./App.css";
-import { createTheme, Theme, useMediaQuery } from '@mui/material';
-import { useEffect, useMemo, useState } from 'react';
-import { ThemeProvider } from '@emotion/react';
+import './App.css';
 import Work from './Work';
 
 const drawerWidth = 240;
@@ -71,73 +73,83 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-start',
 }));
 
-const categories = [
+interface Project {
+  name: string,
+  link: string,
+  idx: number
+}
+
+interface Category {
+  name: string;
+  projects: Project[];
+}
+
+const categories: Category[] = [
   {
-    "name": "Work Experience",
-    "projects": [
+    name: 'Work Experience',
+    projects: [
       {
-        "name": "AutoCAD Trace",
-        "link": "work",
-        "idx": 0
+        name: 'AutoCAD Trace',
+        link: 'work',
+        idx: 0,
       },
-    ]
+    ],
   },
   {
-    "name": "AI Projects",
-    "projects": [
+    name: 'AI Projects',
+    projects: [
       {
-        "name": "AI Teacher",
-        "link": "project/AI_Teacher",
-        "idx": 1
-      }
-    ]
+        name: 'AI Teacher',
+        link: 'project/AI_Teacher',
+        idx: 1,
+      },
+    ],
   },
   {
-    "name": "Frontend Mentor",
-    "projects": [
+    name: 'Frontend Mentor',
+    projects: [
       {
-        "name": "QR Code",
-        "link": "project/QR-Component-FM",
-        "idx": 2
+        name: 'QR Code',
+        link: 'project/QR-Component-FM',
+        idx: 2,
       },
       {
-        "name": "Product Preview",
-        "link": "project/Product-Preview-FM",
-        "idx": 3
-      }
-    ]
+        name: 'Product Preview',
+        link: 'project/Product-Preview-FM',
+        idx: 3,
+      },
+    ],
   },
   {
-    "name": "Graphics Project",
-    "projects": [
+    name: 'Graphics Project',
+    projects: [
       {
-        "name": "Bubbles and Glass",
-        "link": "project/CS114_Final",
-        "idx": 4
-      }
-    ]
-  }
+        name: 'Bubbles and Glass',
+        link: 'project/CS114_Final',
+        idx: 4,
+      },
+    ],
+  },
 ];
 
 type RGBA = [number, number, number, number];
 
 function App() {
-  const prefersDarkMode: boolean = useMediaQuery("(prefers-color-scheme: dark)");
-  const isDesktop: boolean = useMediaQuery("(min-width: 800px)");
-  const theme: Theme = useMemo(() =>
-    createTheme({
-      palette: {
-        mode: prefersDarkMode ? "dark" : "light"
-      }
-    }), [prefersDarkMode]);
+  const prefersDarkMode: boolean = useMediaQuery('(prefers-color-scheme: dark)');
+  const isDesktop: boolean = useMediaQuery('(min-width: 800px)');
+  const theme: Theme = useMemo(() => createTheme({
+    palette: {
+      mode: prefersDarkMode ? 'dark' : 'light',
+    },
+  }), [prefersDarkMode]);
   const [open, setOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(() => {
-    const initVal = localStorage.getItem("selected") || "-1";
+    const initVal = localStorage.getItem('selected') || '-1';
     return Number(initVal);
   });
 
   useEffect(() => {
-    localStorage.setItem("selected", String(selectedProject));
+    localStorage.setItem('selected', String(selectedProject));
   }, [selectedProject]);
 
   const handleDrawerOpen = () => {
@@ -148,105 +160,105 @@ function App() {
     setOpen(false);
   };
 
-  const radialString = (startClr: RGBA, endClr: RGBA) => {
-    return `radial-gradient(circle,
+  const radialString = (startClr: RGBA, endClr: RGBA) => `radial-gradient(circle,
       rgba(${startClr[0]},${startClr[1]},${startClr[2]},${startClr[3]}) 0%,
       rgba(${endClr[0]},${endClr[1]},${endClr[2]},${endClr[3]}) 50%)`;
-  };
 
-  const lightBkgd: string = radialString([1, 79, 82, .5], [0, 221, 225, .2]);
+  const lightBkgd: string = radialString([1, 79, 82, 0.5], [0, 221, 225, 0.2]);
   const darkBkgd: string = radialString([255, 113, 0, 1], [0, 0, 0, 1]);
 
-  const setSelectedFactory = (idx: number) => {
-    return () => {
-      setSelectedProject(idx);
-    };
+  const setSelectedFactory = (idx: number) => () => {
+    setSelectedProject(idx);
   };
 
   const onlyProjects = () => {
-    const projects = [];
-    for (const cat of categories)
-      projects.push(...cat["projects"]);
+    const projects: Project[] = [];
+    categories.forEach((cat) => projects.push(...cat.projects));
     return projects;
   };
 
-  const isSelected = (idx: number) => 
-    selectedProject === idx;
+  const isSelected = (idx: number) => selectedProject === idx;
 
   return (
     <ThemeProvider theme={theme}>
-      <HashRouter basename='/'>
-        <Box sx={{ display: 'flex', height: "100vh" }}>
+      <HashRouter basename="/">
+        <Box sx={{ display: 'flex', height: '100vh' }}>
           <CssBaseline />
           <AppBar position="fixed" open={open}>
-            <Toolbar sx={{ 
-              backgroundColor: 
-                prefersDarkMode ? "black" : "white",
-              width: "100vw"
-            }}>
-              <Typography variant="h6" noWrap sx={{ flexGrow: 1, display: "flex", justifyContent: "space-between" }} component="div">
-                <Link 
+            <Toolbar sx={{
+              backgroundColor:
+                prefersDarkMode ? 'black' : 'white',
+              width: '100vw',
+            }}
+            >
+              <Typography variant="h6" noWrap sx={{ flexGrow: 1, display: 'flex', justifyContent: 'space-between' }} component="div">
+                <Link
                   onClick={setSelectedFactory(-1)}
                   className="bare-link title"
-                  to={"/"}
+                  to="/"
                 >
-                  { selectedProject == -1 ? "Paul's Projects" : "Home" }
+                  { selectedProject === -1 ? "Paul's Projects" : 'Home' }
                 </Link>
-                <div className='project-links'>
-                  {isDesktop ? onlyProjects().map((project, idx) =>
+                <div className="project-links">
+                  {isDesktop ? onlyProjects().map((project, idx) => (
                     <Link
                       key={idx}
                       onClick={setSelectedFactory(idx)}
                       className={
                         `bare-link
                         link
-                        ${isSelected(idx) ? "sel-link" : "not-sel-link"}`
+                        ${isSelected(idx) ? 'sel-link' : 'not-sel-link'}`
                       }
-                      to={`${project["link"]}/`}
+                      to={`${project.link}/`}
                     >
-                      {project["name"]}
+                      {project.name}
                     </Link>
-                  ) : ""}
+                  )) : ''}
                 </div>
               </Typography>
-              { !isDesktop ?
-              <IconButton
-                aria-label="open drawer"
-                edge="end"
-                onClick={handleDrawerOpen}
-                sx={{ ...(open && { display: 'none' }) }}
-              >
-                <MenuIcon />
-              </IconButton> : ""}
+              { !isDesktop
+                ? (
+                  <IconButton
+                    aria-label="open drawer"
+                    edge="end"
+                    onClick={handleDrawerOpen}
+                    sx={{ ...(open && { display: 'none' }) }}
+                  >
+                    <MenuIcon />
+                  </IconButton>
+                ) : ''}
             </Toolbar>
           </AppBar>
-          <Main open={open} sx={{ 
-            display: "flex",
-            justifyContent: "center",
-            background: prefersDarkMode ?
-              darkBkgd : lightBkgd,
-            // Use the styling from the styled component.
-            margin: isDesktop ? 0 : "",
-            overflowY: "auto",
-            overflowX: "hidden"
-          }}>
+          <Main
+            open={open}
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              background: prefersDarkMode
+                ? darkBkgd : lightBkgd,
+              // Use the styling from the styled component.
+              margin: isDesktop ? 0 : '',
+              overflowY: 'auto',
+              overflowX: 'hidden',
+            }}
+          >
             <Routes>
-              <Route path='/' element={<Homepage />}/>
-              <Route path='/work' element={<Work />}/>
-              <Route path='/project/:project' element={<Host />}/>
+              <Route path="/" element={<Homepage />} />
+              <Route path="/work" element={<Work />} />
+              <Route path="/project/:project" element={<Host />} />
             </Routes>
           </Main>
           <Drawer
             sx={{
-              display: isDesktop ? "none" : "flex",
+              display: isDesktop ? 'none' : 'flex',
               width: drawerWidth,
               flexShrink: 0,
               '& .MuiDrawer-paper': {
                 width: drawerWidth,
-              }
+              },
             }}
             anchor="right"
-            variant='persistent'
+            variant="persistent"
             open={open}
           >
             <DrawerHeader>
@@ -256,18 +268,18 @@ function App() {
             </DrawerHeader>
             <Divider />
             {categories.map((category, idx) => (
-              <div key={idx} className='category'>
-                <h3 className='category-title title'>{category["name"]}</h3>
+              <div key={idx} className="category">
+                <h3 className="category-title title">{category.name}</h3>
                 <Divider />
                 <List disablePadding dense>
-                  {category["projects"].map((project) => (
-                    <ListItem 
-                      key={project["idx"]}
-                      onClick={setSelectedFactory(project["idx"])}
-                      className={"item"}
+                  {category.projects.map((project) => (
+                    <ListItem
+                      key={project.idx}
+                      onClick={setSelectedFactory(project.idx)}
+                      className="item"
                       disablePadding
                     >
-                      <Link className={`bare-link link ${isSelected(project["idx"]) ? "sel-link" : "not-sel-link"}`} to={`${project["link"]}/`}>{project["name"]}</Link>
+                      <Link className={`bare-link link ${isSelected(project.idx) ? 'sel-link' : 'not-sel-link'}`} to={`${project.link}/`}>{project.name}</Link>
                     </ListItem>
                   ))}
                 </List>

@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm run eslint
+npm run lint
 git ls-files --others | grep -v node_modules
