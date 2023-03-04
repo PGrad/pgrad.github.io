@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import { SocialIcon } from 'react-social-icons';
-import './homepage.css';
-import * as THREE from 'three';
-import { useMediaQuery } from '@mui/material';
+import { useEffect, useState } from "react";
+import { SocialIcon } from "react-social-icons";
+import "./homepage.css";
+import * as THREE from "three";
+import { useMediaQuery } from "@mui/material";
 
 function Avatar() {
   return (
@@ -19,7 +19,7 @@ export default function Homepage() {
     height: 0,
   });
 
-  const useDarkTheme = useMediaQuery('(prefers-color-scheme: dark)');
+  const useDarkTheme = useMediaQuery("(prefers-color-scheme: dark)");
 
   useEffect((): VoidFunc => {
     let timeout: number | null = null;
@@ -45,7 +45,7 @@ export default function Homepage() {
 
     const unmount: VoidFunc = () => {
       if (listening) {
-        window.removeEventListener('resize', onresize);
+        window.removeEventListener("resize", onresize);
       }
     };
 
@@ -55,9 +55,9 @@ export default function Homepage() {
       return unmount;
     }
 
-    const homepage = document.getElementById('homepage-main');
+    const homepage = document.getElementById("homepage-main");
     if (!homepage) return unmount;
-    const canvas = document.getElementById('canvas');
+    const canvas = document.getElementById("canvas");
     if (canvas) {
       homepage.removeChild(canvas);
     }
@@ -69,7 +69,7 @@ export default function Homepage() {
       75,
       window.innerWidth / window.innerHeight,
       0.1,
-      1000,
+      1000
     );
 
     const geometry = new THREE.SphereGeometry(10, 32, 16);
@@ -77,9 +77,9 @@ export default function Homepage() {
 
     renderer.setSize(
       Math.round(dimensions.width),
-      Math.round(dimensions.height),
+      Math.round(dimensions.height)
     );
-    renderer.domElement.id = 'canvas';
+    renderer.domElement.id = "canvas";
     homepage.appendChild(renderer.domElement);
 
     let material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
@@ -87,16 +87,16 @@ export default function Homepage() {
     let sphere: THREE.Mesh | null = null;
     loader.load(
       useDarkTheme
-      // Credit to NASA
-        ? './mars_texture.png'
-        : './moon_texture.jpg',
+        ? // Credit to NASA
+          "./mars_texture.png"
+        : "./moon_texture.jpg",
       (texture) => {
         material = new THREE.MeshBasicMaterial({
           map: texture,
         });
         sphere = new THREE.Mesh(geometry, material);
         scene.add(sphere);
-      },
+      }
     );
 
     camera.position.z = 20;
@@ -114,7 +114,7 @@ export default function Homepage() {
 
     animate();
 
-    window.addEventListener('resize', onresize);
+    window.addEventListener("resize", onresize);
     listening = true;
 
     return unmount;
@@ -125,8 +125,16 @@ export default function Homepage() {
         <div className="avatar-card">
           <Avatar />
           <div className="socials fade-in">
-            <SocialIcon className="icon" fgColor="white" url="https://github.com/PGrad" />
-            <SocialIcon className="icon" fgColor="white" url="https://www.linkedin.com/in/paulgrad3/" />
+            <SocialIcon
+              className="icon"
+              fgColor="white"
+              url="https://github.com/PGrad"
+            />
+            <SocialIcon
+              className="icon"
+              fgColor="white"
+              url="https://www.linkedin.com/in/paulgrad3/"
+            />
           </div>
         </div>
         <section className="intro">
@@ -134,7 +142,9 @@ export default function Homepage() {
             <p>Frontend Web Developer based out of Oakland, CA.</p>
             <p>Interested in AI, languages, space, and cats.</p>
           </div>
-          <a className="resume fade-in" href="https://bit.ly/3Z0H3PK">Resumé</a>
+          <a className="resume fade-in" href="https://bit.ly/3Z0H3PK">
+            Resumé
+          </a>
         </section>
       </section>
     </main>

@@ -1,178 +1,178 @@
 .work {
-    display: flex;
-    flex-direction: column;
-    padding-top: 5em;
-    text-align: center;
-    margin: 0 2em;
-    overflow-y: auto;
-    font-family: "Work Sans";
-    -ms-overflow-style: none;
+  display: flex;
+  flex-direction: column;
+  padding-top: 5em;
+  text-align: center;
+  margin: 0 2em;
+  overflow-y: auto;
+  font-family: "Work Sans";
+  -ms-overflow-style: none;
 }
 
 .work::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 .project-block {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .project-heading {
-    font-size: 2.3em;
-    margin-bottom: 0;
-    font-style: italic;
+  font-size: 2.3em;
+  margin-bottom: 0;
+  font-style: italic;
 }
 
 .project-desc {
-    text-align: center;
-    align-self: center;
-    font-size: 1.3em;
+  text-align: center;
+  align-self: center;
+  font-size: 1.3em;
 }
 
 .project-dates {
-    text-transform: uppercase;
-    color: floralwhite;
-    margin-top: 0;
-    margin-bottom: 1em;
-    font-size: 1.3em;
+  text-transform: uppercase;
+  color: floralwhite;
+  margin-top: 0;
+  margin-bottom: 1em;
+  font-size: 1.3em;
 }
 
 .project-image {
-    display: inline-block;
-    align-self: flex-start;
-    max-width: 15em
+  display: inline-block;
+  align-self: flex-start;
+  max-width: 15em;
 }
 
 .img-description {
-    min-width: 10em;
-    max-width: 20em;
+  min-width: 10em;
+  max-width: 20em;
 }
 
 .project-imgs {
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    list-style-type: none;
-    flex-wrap: wrap;
-    gap: 5em;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  list-style-type: none;
+  flex-wrap: wrap;
+  gap: 5em;
 }
 
 .checkbox {
-    display: flex;
-    place-content: center;
+  display: flex;
+  place-content: center;
 }
 
 @media (max-width: 1300px) {
-    .project-imgs {
-        flex-direction: column;
-    }
+  .project-imgs {
+    flex-direction: column;
+  }
 }
 
 @media (min-width: 800px) and (max-width: 1300px) {
-    .img-block {
-        flex-direction: row;
-    }
+  .img-block {
+    flex-direction: row;
+  }
 }
 
 @media (min-width: 800px) {
-    .animated {
-        /* 
+  .animated {
+    /* 
             The lava lamp animation looks bad on mobile. 
             The text is constantly shifting as the
             container changes in size.
         */
-        animation: lava-lamp 5s ease-in-out 0s infinite alternate;
-    }
-    .non-animated {
-        padding: 4em;
-    }
-    .img-block {
-        font-size: 1.1em;
-    }
+    animation: lava-lamp 5s ease-in-out 0s infinite alternate;
+  }
+  .non-animated {
+    padding: 4em;
+  }
+  .img-block {
+    font-size: 1.1em;
+  }
 }
 
 @media (max-width: 800px) {
-    .work {
-        margin: auto;
-    }
-    .img-block {
-        flex-direction: column;
-        padding: 4em;
-    }
-    .project-heading {
-        font-size: 1.5em;
-    }
-    .project-desc {
-        max-width: 20em;
-    }
+  .work {
+    margin: auto;
+  }
+  .img-block {
+    flex-direction: column;
+    padding: 4em;
+  }
+  .project-heading {
+    font-size: 1.5em;
+  }
+  .project-desc {
+    max-width: 20em;
+  }
 }
 
 @media (prefers-color-scheme: light) {
-    @keyframes lava-lamp {
-        from { 
-            filter: drop-shadow(0 0 1em cyan);
-            padding: 4em;
-        }
-        to { 
-            filter: drop-shadow(0 0 2em green);
-            padding: 5em;
-        }
+  @keyframes lava-lamp {
+    from {
+      filter: drop-shadow(0 0 1em cyan);
+      padding: 4em;
     }
+    to {
+      filter: drop-shadow(0 0 2em green);
+      padding: 5em;
+    }
+  }
 
-    .work {
-        color: black;
-    }
-    .project-heading {
-        color: seagreen;
-    }
-    .project-dates {
-        color: grey
-    }
-    .img-block {
-        background-color:peachpuff;
-        color: darkgreen;
-    }
+  .work {
+    color: black;
+  }
+  .project-heading {
+    color: seagreen;
+  }
+  .project-dates {
+    color: grey;
+  }
+  .img-block {
+    background-color: peachpuff;
+    color: darkgreen;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
-    @keyframes lava-lamp {
-        from { 
-            filter: drop-shadow(0 0 1em orange);
-            padding: 4em;
-        }
-        to { 
-            filter: drop-shadow(0 0 2em red);
-            padding: 5em;
-        }
+  @keyframes lava-lamp {
+    from {
+      filter: drop-shadow(0 0 1em orange);
+      padding: 4em;
     }
-    .work {
-        color: white;
+    to {
+      filter: drop-shadow(0 0 2em red);
+      padding: 5em;
     }
-    .project-heading {
-        color:darkorange;
-    }
-    .project-dates {
-        color:red;
-    }
-    .img-block {
-        background-color: black;
-        color: darkorange;
-    }
+  }
+  .work {
+    color: white;
+  }
+  .project-heading {
+    color: darkorange;
+  }
+  .project-dates {
+    color: red;
+  }
+  .img-block {
+    background-color: black;
+    color: darkorange;
+  }
 }
 
 .img-block {
-    display: flex;
-    gap: 3em;
-    text-align: left;
-    border-radius: 5em;
-    width: fit-content;
+  display: flex;
+  gap: 3em;
+  text-align: left;
+  border-radius: 5em;
+  width: fit-content;
 }
 
 .img-block:hover:nth-child(1) {
-    animation-play-state: paused;
+  animation-play-state: paused;
 }
 
 .img-block:hover:nth-child(2) {
-    animation-play-state: paused;
+  animation-play-state: paused;
 }

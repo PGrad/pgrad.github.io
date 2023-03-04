@@ -1,6 +1,6 @@
-import { Checkbox, useMediaQuery } from '@mui/material';
-import { useState } from 'react';
-import './Work.css';
+import { Checkbox, useMediaQuery } from "@mui/material";
+import { useState } from "react";
+import "./Work.css";
 
 interface Image {
   src: string;
@@ -17,14 +17,14 @@ interface ProjectProps {
 
 const projects: ProjectProps[] = [
   {
-    title: 'AutoCAD Trace and Markup',
-    dates: 'June 2018 - September 2022',
+    title: "AutoCAD Trace and Markup",
+    dates: "June 2018 - September 2022",
     images: [
       {
-        src: './AutoCAD/Trace_Palette.png',
-        alt: 'Trace Palette',
+        src: "./AutoCAD/Trace_Palette.png",
+        alt: "Trace Palette",
         description: [
-          'The Trace palette for AutoCAD desktop built in React.',
+          "The Trace palette for AutoCAD desktop built in React.",
           `Users first create a trace with the Create Trace button at top left.
                     Each trace shows the avatars of collaborators, the trace name,
                     and date of last modification.`,
@@ -33,8 +33,8 @@ const projects: ProjectProps[] = [
         ],
       },
       {
-        src: './AutoCAD/Markup_Assist.png',
-        alt: 'Markup Assist Dialog',
+        src: "./AutoCAD/Markup_Assist.png",
+        alt: "Markup Assist Dialog",
         description: [
           `I was responsible for the Markup Assist dialogs at bottom right.
                     The Trace visor is at top left, created by my former colleague Megan Mahoney.`,
@@ -47,19 +47,16 @@ const projects: ProjectProps[] = [
         ],
       },
     ],
-    description:
-            `The AutoCAD Trace palette was shipped in AutoCAD 2022 
+    description: `The AutoCAD Trace palette was shipped in AutoCAD 2022 
             and Markup Assist in 2023. Both features helped increase
             adoption of AutoCAD Web by Desktop users by 3% or several
             thousand users.`,
   },
 ];
 
-function Project({
-  title, dates, images, description,
-}: ProjectProps) {
+function Project({ title, dates, images, description }: ProjectProps) {
   const [checked, setChecked] = useState(false);
-  const isDesktop: boolean = useMediaQuery('(min-width: 800px)');
+  const isDesktop: boolean = useMediaQuery("(min-width: 800px)");
   const change = () => {
     setChecked(!checked);
   };
@@ -70,26 +67,29 @@ function Project({
       <p className="project-desc">{description}</p>
       <ul className="project-imgs">
         {images.map((img, idx) => (
-          <li className={`img-block ${checked ? 'animated' : 'non-animated'}`} key={idx}>
+          <li
+            className={`img-block ${checked ? "animated" : "non-animated"}`}
+            key={idx}
+          >
             <img className="project-image" src={img.src} alt={img.alt} />
             <div className="img-description">
               {img.description.map((desc, imgIdx) => (
-                <p key={imgIdx} className="img-paragraph">{desc}</p>
+                <p key={imgIdx} className="img-paragraph">
+                  {desc}
+                </p>
               ))}
             </div>
           </li>
         ))}
       </ul>
-      {
-                isDesktop
-                  ? (
-                    <span className="checkbox">
-                      <Checkbox checked={checked} onChange={change} />
-                      <p>Turn on lava lamp effect!</p>
-                    </span>
-                  )
-                  : ''
-            }
+      {isDesktop ? (
+        <span className="checkbox">
+          <Checkbox checked={checked} onChange={change} />
+          <p>Turn on lava lamp effect!</p>
+        </span>
+      ) : (
+        ""
+      )}
     </section>
   );
 }

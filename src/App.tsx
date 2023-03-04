@@ -1,41 +1,39 @@
-import { useEffect, useMemo, useState } from 'react';
-import { ThemeProvider } from '@emotion/react';
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import CssBaseline from '@mui/material/CssBaseline';
-import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItem from '@mui/material/ListItem';
-import {
-  HashRouter, Link, Route, Routes,
-} from 'react-router-dom';
-import { createTheme, Theme, useMediaQuery } from '@mui/material';
-import Homepage from './homepage';
-import Host from './Host';
-import './App.css';
-import Work from './Work';
+import { useEffect, useMemo, useState } from "react";
+import { ThemeProvider } from "@emotion/react";
+import { styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import CssBaseline from "@mui/material/CssBaseline";
+import List from "@mui/material/List";
+import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import ListItem from "@mui/material/ListItem";
+import { HashRouter, Link, Route, Routes } from "react-router-dom";
+import { createTheme, Theme, useMediaQuery } from "@mui/material";
+import Homepage from "./homepage";
+import Host from "./Host";
+import "./App.css";
+import Work from "./Work";
 
 const drawerWidth = 240;
 
-const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
+const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
   open?: boolean;
 }>(({ theme, open }) => ({
   flexGrow: 1,
-  transition: theme.transitions.create('margin', {
+  transition: theme.transitions.create("margin", {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
   marginRight: -drawerWidth,
   ...(open && {
-    transition: theme.transitions.create('margin', {
+    transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
@@ -48,15 +46,15 @@ interface AppBarProps extends MuiAppBarProps {
 }
 
 const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
+  shouldForwardProp: (prop) => prop !== "open",
 })<AppBarProps>(({ theme, open }) => ({
-  transition: theme.transitions.create(['margin', 'width'], {
+  transition: theme.transitions.create(["margin", "width"], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
   ...(open && {
     width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['margin', 'width'], {
+    transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
@@ -64,19 +62,19 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
+const DrawerHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
   padding: theme.spacing(0, 1),
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
-  justifyContent: 'flex-start',
+  justifyContent: "flex-start",
 }));
 
 interface Project {
-  name: string,
-  link: string,
-  idx: number
+  name: string;
+  link: string;
+  idx: number;
 }
 
 interface Category {
@@ -86,46 +84,46 @@ interface Category {
 
 const categories: Category[] = [
   {
-    name: 'Work Experience',
+    name: "Work Experience",
     projects: [
       {
-        name: 'AutoCAD Trace',
-        link: 'work',
+        name: "AutoCAD Trace",
+        link: "work",
         idx: 0,
       },
     ],
   },
   {
-    name: 'AI Projects',
+    name: "AI Projects",
     projects: [
       {
-        name: 'AI Teacher',
-        link: 'project/AI_Teacher',
+        name: "AI Teacher",
+        link: "project/AI_Teacher",
         idx: 1,
       },
     ],
   },
   {
-    name: 'Frontend Mentor',
+    name: "Frontend Mentor",
     projects: [
       {
-        name: 'QR Code',
-        link: 'project/QR-Component-FM',
+        name: "QR Code",
+        link: "project/QR-Component-FM",
         idx: 2,
       },
       {
-        name: 'Product Preview',
-        link: 'project/Product-Preview-FM',
+        name: "Product Preview",
+        link: "project/Product-Preview-FM",
         idx: 3,
       },
     ],
   },
   {
-    name: 'Graphics Project',
+    name: "Graphics Project",
     projects: [
       {
-        name: 'Bubbles and Glass',
-        link: 'project/CS114_Final',
+        name: "Bubbles and Glass",
+        link: "project/CS114_Final",
         idx: 4,
       },
     ],
@@ -135,21 +133,27 @@ const categories: Category[] = [
 type RGBA = [number, number, number, number];
 
 function App() {
-  const prefersDarkMode: boolean = useMediaQuery('(prefers-color-scheme: dark)');
-  const isDesktop: boolean = useMediaQuery('(min-width: 800px)');
-  const theme: Theme = useMemo(() => createTheme({
-    palette: {
-      mode: prefersDarkMode ? 'dark' : 'light',
-    },
-  }), [prefersDarkMode]);
+  const prefersDarkMode: boolean = useMediaQuery(
+    "(prefers-color-scheme: dark)"
+  );
+  const isDesktop: boolean = useMediaQuery("(min-width: 800px)");
+  const theme: Theme = useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode: prefersDarkMode ? "dark" : "light",
+        },
+      }),
+    [prefersDarkMode]
+  );
   const [open, setOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(() => {
-    const initVal = localStorage.getItem('selected') || '-1';
+    const initVal = localStorage.getItem("selected") || "-1";
     return Number(initVal);
   });
 
   useEffect(() => {
-    localStorage.setItem('selected', String(selectedProject));
+    localStorage.setItem("selected", String(selectedProject));
   }, [selectedProject]);
 
   const handleDrawerOpen = () => {
@@ -160,7 +164,10 @@ function App() {
     setOpen(false);
   };
 
-  const radialString = (startClr: RGBA, endClr: RGBA) => `radial-gradient(circle,
+  const radialString = (
+    startClr: RGBA,
+    endClr: RGBA
+  ) => `radial-gradient(circle,
       rgba(${startClr[0]},${startClr[1]},${startClr[2]},${startClr[3]}) 0%,
       rgba(${endClr[0]},${endClr[1]},${endClr[2]},${endClr[3]}) 50%)`;
 
@@ -182,64 +189,73 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <HashRouter basename="/">
-        <Box sx={{ display: 'flex', height: '100vh' }}>
+        <Box sx={{ display: "flex", height: "100vh" }}>
           <CssBaseline />
           <AppBar position="fixed" open={open}>
-            <Toolbar sx={{
-              backgroundColor:
-                prefersDarkMode ? 'black' : 'white',
-              width: '100vw',
-            }}
+            <Toolbar
+              sx={{
+                backgroundColor: prefersDarkMode ? "black" : "white",
+                width: "100vw",
+              }}
             >
-              <Typography variant="h6" noWrap sx={{ flexGrow: 1, display: 'flex', justifyContent: 'space-between' }} component="div">
+              <Typography
+                variant="h6"
+                noWrap
+                sx={{
+                  flexGrow: 1,
+                  display: "flex",
+                  justifyContent: "space-between",
+                }}
+                component="div"
+              >
                 <Link
                   onClick={setSelectedFactory(-1)}
                   className="bare-link title"
                   to="/"
                 >
-                  { selectedProject === -1 ? "Paul's Projects" : 'Home' }
+                  {selectedProject === -1 ? "Paul's Projects" : "Home"}
                 </Link>
                 <div className="project-links">
-                  {isDesktop ? onlyProjects().map((project, idx) => (
-                    <Link
-                      key={idx}
-                      onClick={setSelectedFactory(idx)}
-                      className={
-                        `bare-link
+                  {isDesktop
+                    ? onlyProjects().map((project, idx) => (
+                        <Link
+                          key={idx}
+                          onClick={setSelectedFactory(idx)}
+                          className={`bare-link
                         link
-                        ${isSelected(idx) ? 'sel-link' : 'not-sel-link'}`
-                      }
-                      to={`${project.link}/`}
-                    >
-                      {project.name}
-                    </Link>
-                  )) : ''}
+                        ${isSelected(idx) ? "sel-link" : "not-sel-link"}`}
+                          to={`${project.link}/`}
+                        >
+                          {project.name}
+                        </Link>
+                      ))
+                    : ""}
                 </div>
               </Typography>
-              { !isDesktop
-                ? (
-                  <IconButton
-                    aria-label="open drawer"
-                    edge="end"
-                    onClick={handleDrawerOpen}
-                    sx={{ ...(open && { display: 'none' }) }}
-                  >
-                    <MenuIcon />
-                  </IconButton>
-                ) : ''}
+              {!isDesktop ? (
+                <IconButton
+                  aria-label="open drawer"
+                  edge="end"
+                  onClick={handleDrawerOpen}
+                  sx={{ ...(open && { display: "none" }) }}
+                >
+                  <MenuIcon />
+                </IconButton>
+              ) : (
+                ""
+              )}
             </Toolbar>
           </AppBar>
           <Main
             open={open}
             sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              background: prefersDarkMode
-                ? darkBkgd : lightBkgd,
+              display: "flex",
+              justifyContent: "center",
+              background: prefersDarkMode ? darkBkgd : lightBkgd,
               // Use the styling from the styled component.
-              margin: isDesktop ? 0 : '',
-              overflowY: 'auto',
-              overflowX: 'hidden',
+              margin: isDesktop ? 0 : "",
+              overflowY: "auto",
+              overflowX: "hidden",
             }}
           >
             <Routes>
@@ -250,10 +266,10 @@ function App() {
           </Main>
           <Drawer
             sx={{
-              display: isDesktop ? 'none' : 'flex',
+              display: isDesktop ? "none" : "flex",
               width: drawerWidth,
               flexShrink: 0,
-              '& .MuiDrawer-paper': {
+              "& .MuiDrawer-paper": {
                 width: drawerWidth,
               },
             }}
@@ -263,7 +279,11 @@ function App() {
           >
             <DrawerHeader>
               <IconButton onClick={handleDrawerClose}>
-                {theme.direction === 'rtl' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                {theme.direction === "rtl" ? (
+                  <ChevronLeftIcon />
+                ) : (
+                  <ChevronRightIcon />
+                )}
               </IconButton>
             </DrawerHeader>
             <Divider />
@@ -279,7 +299,14 @@ function App() {
                       className="item"
                       disablePadding
                     >
-                      <Link className={`bare-link link ${isSelected(project.idx) ? 'sel-link' : 'not-sel-link'}`} to={`${project.link}/`}>{project.name}</Link>
+                      <Link
+                        className={`bare-link link ${
+                          isSelected(project.idx) ? "sel-link" : "not-sel-link"
+                        }`}
+                        to={`${project.link}/`}
+                      >
+                        {project.name}
+                      </Link>
                     </ListItem>
                   ))}
                 </List>

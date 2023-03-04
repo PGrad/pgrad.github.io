@@ -1,6 +1,6 @@
-import Iframe from 'react-iframe';
-import { useParams } from 'react-router-dom';
-import './Host.css';
+import Iframe from "react-iframe";
+import { useParams } from "react-router-dom";
+import "./Host.css";
 
 export default function Host() {
   const { project } = useParams();
@@ -15,5 +15,6 @@ export default function Host() {
         <Iframe className="host" url={url} width="100%" height="100%" />
       </div>
     );
-  } return (<p>Bad project link!</p>);
+  }
+  return <p>Bad project link!</p>;
 }

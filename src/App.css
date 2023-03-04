@@ -1,79 +1,79 @@
 .app {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .title {
-    font-family: "Orbitron";
-    font-weight: bold;
+  font-family: "Orbitron";
+  font-weight: bold;
 }
 
 .category-title {
-    margin: .1em 0 0 0;
-    text-align: center;
+  margin: 0.1em 0 0 0;
+  text-align: center;
 }
 
 .project-links {
-    display: flex;
-    font-size: .9em;
-    align-items: center;
+  display: flex;
+  font-size: 0.9em;
+  align-items: center;
 }
 
 .bare-link {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .item {
-    border-radius: 1.5px;
+  border-radius: 1.5px;
 }
 
 .link {
-    padding: 0 .5em 0 .5em;
-    font-family: "Roboto";
+  padding: 0 0.5em 0 0.5em;
+  font-family: "Roboto";
 }
 
 li a {
-    width: 100%;
+  width: 100%;
 }
 
-@media(prefers-color-scheme: light) {
-    .sel-link {
-        background-color: rgba(0, 221, 225, .5);
-    }
-    
-    .not-sel-link:hover {
-        background-color: rgba(0, 0, 0, .1);
-    }
+@media (prefers-color-scheme: light) {
+  .sel-link {
+    background-color: rgba(0, 221, 225, 0.5);
+  }
+
+  .not-sel-link:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
 }
 
-@media(prefers-color-scheme: dark) {
-    .sel-link {
-        background-color: rgba(255, 113, 0, 1);
-    }
+@media (prefers-color-scheme: dark) {
+  .sel-link {
+    background-color: rgba(255, 113, 0, 1);
+  }
 
-    .not-sel-link:hover {
-        background-color: rgba(255, 255, 255, .1);
-    }
+  .not-sel-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
 }
 
 .not-sel-link {
-    background-color: inherit;
+  background-color: inherit;
 }
 
-@media(prefers-color-scheme: light) {
-    .bare-link {
-        color: black;
-    }
-    .not-sel-link:hover {
-        color: blue;
-    }
+@media (prefers-color-scheme: light) {
+  .bare-link {
+    color: black;
+  }
+  .not-sel-link:hover {
+    color: blue;
+  }
 }
 
-@media(prefers-color-scheme: dark) {
-    .bare-link {
-        color: white;
-    }
-    .not-sel-link:hover {
-        color: red;
-    }
+@media (prefers-color-scheme: dark) {
+  .bare-link {
+    color: white;
+  }
+  .not-sel-link:hover {
+    color: red;
+  }
 }
