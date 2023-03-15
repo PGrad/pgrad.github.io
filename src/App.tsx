@@ -122,7 +122,7 @@ const categories: Category[] = [
     name: "Graphics Project",
     projects: [
       {
-        name: "Bubbles and Glass",
+        name: "3D Raymarching",
         link: "project/CS114_Final",
         idx: 4,
       },
