@@ -1,5 +1,4 @@
 import Iframe from "react-iframe";
-import { useParams } from "react-router-dom";
 import "./Host.css";
 
 // Iframes can't be explored by screen
