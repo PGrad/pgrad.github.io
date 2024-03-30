@@ -16,7 +16,7 @@ export default function Host({ project }: HostParams) {
     return (
       <div className="host-container">
         <h3 className="project-link">
-          Live at
+          Live at&nbsp;
           <a href={url}>{url}</a>
         </h3>
         <Iframe
