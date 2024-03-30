@@ -1,6 +1,7 @@
 .work {
   display: flex;
   flex-direction: column;
+  align-items: center;
   padding-top: 5em;
   text-align: center;
   font-family: "Work Sans";
@@ -14,6 +15,7 @@
 .project-block {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .project-heading {
