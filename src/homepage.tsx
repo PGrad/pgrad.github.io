@@ -32,8 +32,8 @@ export default function Homepage() {
 
       timeout = window.setTimeout(() => {
         setDimensions({
-          width: window.innerWidth,
-          height: window.innerHeight,
+          width: window.innerWidth * .8,
+          height: window.innerHeight * .8,
         });
 
         if (timeout) {

@@ -21,6 +21,7 @@ import Host from "./Host";
 import "./App.css";
 import Work from "./Work";
 
+
 const drawerWidth = 240;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
@@ -98,23 +99,8 @@ const categories: Category[] = [
     projects: [
       {
         name: "AI Teacher",
-        link: "project/AI_Teacher",
+        link: "AI_Teacher",
         idx: 1,
-      },
-    ],
-  },
-  {
-    name: "Frontend Mentor",
-    projects: [
-      {
-        name: "QR Code",
-        link: "project/QR-Component-FM",
-        idx: 2,
-      },
-      {
-        name: "Product Preview",
-        link: "project/Product-Preview-FM",
-        idx: 3,
       },
     ],
   },
@@ -123,7 +109,7 @@ const categories: Category[] = [
     projects: [
       {
         name: "3D Raymarching",
-        link: "project/CS114_Final",
+        link: "CS114_Final",
         idx: 4,
       },
     ],
@@ -189,9 +175,9 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <HashRouter basename="/">
-        <Box sx={{ display: "flex", height: "100vh" }}>
+        <Box sx={{ display: "flex" }}>
           <CssBaseline />
-          <AppBar position="fixed" open={open}>
+          <AppBar position="fixed" open={open} sx={{marginBottom: "5em" }}>
             <Toolbar
               sx={{
                 backgroundColor: prefersDarkMode ? "black" : "white",
@@ -250,6 +236,7 @@ function App() {
             open={open}
             sx={{
               display: "flex",
+              flexDirection: "column",
               justifyContent: "center",
               background: prefersDarkMode ? darkBkgd : lightBkgd,
               // Use the styling from the styled component.
@@ -258,11 +245,11 @@ function App() {
               overflowX: "hidden",
             }}
           >
-            <Routes>
-              <Route path="/" element={<Homepage />} />
-              <Route path="/work" element={<Work />} />
-              <Route path="/project/:project" element={<Host />} />
-            </Routes>
+                <Homepage />
+                <Work />
+              {onlyProjects().slice(1).map(project => (
+                  <Host project={project.link} />
+              ))}
           </Main>
           <Drawer
             sx={{

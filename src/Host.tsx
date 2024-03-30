@@ -5,10 +5,13 @@ import "./Host.css";
 // Iframes can't be explored by screen
 // readers, so it's best to hide them.
 
+type HostParams = {
+  project: string;
+};
+
 // If a disabled user wants to access
 // the project, they can click on the link.
-export default function Host() {
-  const { project } = useParams();
+export default function Host({ project }: HostParams) {
   if (project) {
     const url = `https://pgrad.github.io/${project}`;
     return (
