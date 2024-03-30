@@ -20,6 +20,7 @@ export default function Homepage() {
   });
 
   const useDarkTheme = useMediaQuery("(prefers-color-scheme: dark)");
+  const isMobile = useMediaQuery("(max-width: 800px)");
 
   useEffect((): VoidFunc => {
     let timeout: number | null = null;
@@ -30,10 +31,12 @@ export default function Homepage() {
     const onresize = () => {
       if (timeout) window.clearTimeout(timeout);
 
+      const scaleFactor = isMobile ? 1 : 0.8;
+
       timeout = window.setTimeout(() => {
         setDimensions({
-          width: window.innerWidth * .8,
-          height: window.innerHeight * .8,
+          width: window.innerWidth * scaleFactor,
+          height: window.innerHeight * scaleFactor,
         });
 
         if (timeout) {
