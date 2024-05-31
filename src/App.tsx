@@ -104,6 +104,16 @@ const categories: Category[] = [
     ],
   },
   {
+    name: "Wolfie's Escape",
+    projects: [
+      {
+        name: "Wolfie's Escape",
+        link: "WolfiesEscape",
+        idx: 1,
+      },
+    ],
+  },
+  {
     name: "Graphics Project",
     projects: [
       {
