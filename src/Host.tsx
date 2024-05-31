@@ -1,18 +1,19 @@
 import Iframe from "react-iframe";
 import "./Host.css";
+import { Project } from "./types";
 
 // Iframes can't be explored by screen
 // readers, so it's best to hide them.
 
 type HostParams = {
-  project: string;
+  project: Project;
 };
 
 // If a disabled user wants to access
 // the project, they can click on the link.
 export default function Host({ project }: HostParams) {
   if (project) {
-    const url = `https://pgrad.github.io/${project}`;
+    const url = project.external ? project.link : `https://pgrad.github.io/${project.link}`;
     return (
       <div className="host-container">
         <h3 className="project-link">

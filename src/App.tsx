@@ -19,6 +19,7 @@ import { Element, Link } from 'react-scroll';
 import Homepage from "./homepage";
 import Host from "./Host";
 import "./App.css";
+import { Category, Project } from "./types";
 
 
 const drawerWidth = 240;
@@ -71,55 +72,44 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-start",
 }));
 
-interface Project {
-  name: string;
-  link: string;
-  idx: number;
-}
-
-interface Category {
-  name: string;
-  projects: Project[];
-}
-
 const categories: Category[] = [
   {
-    name: "Hidden Gems",
+    name: "Personal Projects",
     projects: [
       {
         name: "Hidden Gems",
         link: "HiddenGems",
-        idx: 0,
+        external: false,
+        idx: 1,
       },
-    ],
-  },
-  {
-    name: "AI Projects",
-    projects: [
       {
         name: "AI Teacher",
         link: "AI_Teacher",
-        idx: 1,
+        external: false,
+        idx: 2,
       },
-    ],
-  },
-  {
-    name: "Wolfie's Escape",
-    projects: [
       {
         name: "Wolfie's Escape",
         link: "WolfiesEscape",
-        idx: 1,
+        external: false,
+        idx: 3,
+      },
+      {
+        name: "3D Raymarching",
+        link: "CS114_Final",
+        external: false,
+        idx: 4,
       },
     ],
   },
   {
-    name: "Graphics Project",
+    name: "Work",
     projects: [
       {
-        name: "3D Raymarching",
-        link: "CS114_Final",
-        idx: 4,
+        name: "US News Reviews",
+        link: "https://web.archive.org/web/20240429064524/https://cars.usnews.com/cars-trucks/chevrolet/corvette/2023",
+        external: true,
+        idx: 0,
       },
     ],
   },
@@ -257,9 +247,9 @@ function App() {
             <Element name="home">
               <Homepage />
             </Element>
-            {onlyProjects().map(project => (
-              <Element key={project.idx} name={project.link}>
-                <Host project={project.link} />
+            {onlyProjects().map((project, idx) => (
+              <Element key={idx} name={project.link}>
+                <Host project={project} />
               </Element>
             ))}
         </Main>
@@ -291,9 +281,9 @@ function App() {
               <h3 className="category-title title">{category.name}</h3>
               <Divider />
               <List disablePadding dense>
-                {category.projects.map((project) => (
+                {category.projects.map((project, pidx) => (
                   <ListItem
-                    key={project.idx}
+                    key={pidx}
                     className="item"
                     disablePadding
                   >
