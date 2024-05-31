@@ -19,7 +19,6 @@ import { Element, Link } from 'react-scroll';
 import Homepage from "./homepage";
 import Host from "./Host";
 import "./App.css";
-import Work from "./Work";
 
 
 const drawerWidth = 240;
@@ -85,11 +84,11 @@ interface Category {
 
 const categories: Category[] = [
   {
-    name: "Work Experience",
+    name: "Hidden Gems",
     projects: [
       {
-        name: "AutoCAD Trace",
-        link: "work",
+        name: "Hidden Gems",
+        link: "HiddenGems",
         idx: 0,
       },
     ],
@@ -248,10 +247,7 @@ function App() {
             <Element name="home">
               <Homepage />
             </Element>
-            <Element name="work">
-              <Work />
-            </Element>
-            {onlyProjects().slice(1).map(project => (
+            {onlyProjects().map(project => (
               <Element key={project.idx} name={project.link}>
                 <Host project={project.link} />
               </Element>
