@@ -102,17 +102,6 @@ const categories: Category[] = [
       },
     ],
   },
-  {
-    name: "Work",
-    projects: [
-      {
-        name: "US News Reviews",
-        link: "https://web.archive.org/web/20240429064524/https://cars.usnews.com/cars-trucks/chevrolet/corvette/2023",
-        external: true,
-        idx: 0,
-      },
-    ],
-  },
 ];
 
 type RGBA = [number, number, number, number];
