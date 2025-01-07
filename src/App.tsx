@@ -237,7 +237,7 @@ function App() {
               <Homepage />
             </Element>
             {onlyProjects().map((project, idx) => (
-              <Element key={idx} name={project.link}>
+              <Element key={idx} name={project.link} style={{ zIndex: 2 }}>
                 <Host project={project} />
               </Element>
             ))}
