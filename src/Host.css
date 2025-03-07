@@ -1,8 +1,10 @@
 .host-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 90vw;
-  height: 100vh;
-  padding-top: 3.5em;
   margin: auto;
+  border: 1px solid black;
 }
 
 @media (prefers-color-scheme: light) {
@@ -24,5 +26,7 @@
 }
 
 .project-link {
+  padding: 2em;
+  margin: auto;
   text-align: center;
 }
