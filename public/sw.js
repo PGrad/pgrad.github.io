@@ -1,3 +1,5 @@
+const OFFLINE_URL = "client/index.html";
+
 self.addEventListener("install", (event) => {
     event.waitUntil(preLoad());
 });
@@ -8,7 +10,7 @@ const preLoad = async () =>{
     const cache = await caches.open("offline");
     console.log("caching index and important routes");
 
-    return await cache.addAll(["/", "/index.html"]);
+    return await cache.addAll(["/", OFFLINE_URL]);
 };
 
 self.addEventListener("fetch", (event) => {
@@ -45,7 +47,7 @@ const returnFromCache = async (request) =>{
     const matching = await cache.match(request);
 
     if (!matching || matching.status == 404) {
-        return cache.match("index.html");
+        return cache.match(OFFLINE_URL);
     } else {
         return matching;
     }
