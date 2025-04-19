@@ -37,13 +37,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - name: npm install and build
-        run: |
-          npm install
-          npm run build
-          mv dist _site
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3.0.1
+      - name: Install, build, and upload your site
+        uses: withastro/action@v3
 
   # Deployment job
   deploy:
