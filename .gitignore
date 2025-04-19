@@ -8,8 +8,10 @@
 # testing
 /coverage
 
-# production
-/build
+# build output
+dist/
+# generated types
+.astro/
 
 # misc
 .DS_Store

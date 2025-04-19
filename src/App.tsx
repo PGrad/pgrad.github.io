@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { ThemeProvider } from "@emotion/react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -121,14 +121,7 @@ function App() {
     [prefersDarkMode]
   );
   const [open, setOpen] = useState(false);
-  const [atHome, setAtHome] = useState(() => {
-    const initVal = localStorage.getItem("at_home") || "true";
-    return Boolean(initVal);
-  });
-
-  useEffect(() => {
-    localStorage.setItem("at_home", String(atHome));
-  }, [atHome]);
+  const [atHome, setAtHome] = useState(true);
 
   const handleDrawerOpen = () => {
     setOpen(true);

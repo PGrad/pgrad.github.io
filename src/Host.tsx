@@ -23,10 +23,10 @@ export default function Host({ project }: HostParams) {
         {/* Spotify doesn't play nice with iframes, so don't bother. */}
         {project.name === 'Hidden Gems' ?
           <img src="thundercat.png" style={{ width: 'fit-content', maxWidth: '100%' }} alt="Hidden Gems" /> :
-          <Iframe
-            ariaHidden
+          <iframe
+            aria-hidden
             className="host"
-            url={url}
+            src={url}
             width="100%"
             height="100%"
           />
