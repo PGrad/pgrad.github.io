@@ -8,7 +8,7 @@ const preLoad = async () =>{
     const cache = await caches.open("offline");
     console.log("caching index and important routes");
 
-    return await cache.addAll(["/", "/offline.html"]);
+    return await cache.addAll(["/", "/index.html"]);
 };
 
 self.addEventListener("fetch", (event) => {
@@ -45,7 +45,7 @@ const returnFromCache = async (request) =>{
     const matching = await cache.match(request);
 
     if (!matching || matching.status == 404) {
-        return cache.match("offline.html");
+        return cache.match("index.html");
     } else {
         return matching;
     }
