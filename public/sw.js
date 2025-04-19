@@ -1,4 +1,4 @@
-const OFFLINE_URL = "client/index.html";
+const OFFLINE_URL = "index.html";
 
 self.addEventListener("install", (event) => {
     event.waitUntil(preLoad());
