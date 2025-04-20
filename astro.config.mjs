@@ -6,7 +6,6 @@ import node from '@astrojs/node';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://pgrad.github.io',
-  base: '/home',
   integrations: [react(), AstroPWA()],
   adapter: node({
     mode: 'standalone'
