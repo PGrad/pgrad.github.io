@@ -1,5 +1,12 @@
 const OFFLINE_URL = "/index.html";
 
+const blocked_urls = [
+    '/AI_Teacher',
+    '/HiddenGems',
+    '/CS114_Final',
+    '/WolfiesEscape'
+];
+
 self.addEventListener("install", (event) => {
     event.waitUntil(preLoad());
 });
@@ -51,14 +58,7 @@ const checkResponse = (request) => {
 
 const addToCache = async (request) => {
     const cache = await caches.open("offline");
-    const blocked_urls = [
-        '/AI_Teacher',
-        '/HiddenGems',
-        '/CS114_Final',
-        '/WolfiesEscape'
-    ];
-
-    if (blocked_urls.some(url => request.url.includes(url))) {
+    if (blocked_urls.some(url => request.url === url)) {
         console.log("Blocked URL: " + request.url);
         return null;
     }

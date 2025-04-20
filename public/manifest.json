@@ -5,7 +5,7 @@
   "display": "standalone",
   "name": "Paul's Projects",
   "orientation": "any",
-  "scope": "/",
+  "scope": "/home",
   "short_name": "All Paul",
   "start_url": "/",
   "theme_color": "#000000",
