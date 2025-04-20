@@ -1,4 +1,4 @@
-const OFFLINE_URL = "index.html";
+const OFFLINE_URL = "/index.html";
 
 self.addEventListener("install", (event) => {
     event.waitUntil(preLoad());
@@ -13,14 +13,14 @@ const preLoad = async () =>{
     return await cache.addAll([
         "/",
         OFFLINE_URL,
-        'index.css',
-        'manifest.json',
-        'Air_and_Space.jpg',
-        'favicon.ico',
-        'mars_texture.jpg',
-        'mars_thumbnail.jpg',
-        'pwa_icon.png',
-        'thundercat.jpg',
+        '/index.css',
+        '/manifest.json',
+        '/Air_and_Space.jpg',
+        '/favicon.ico',
+        '/mars_texture.jpg',
+        '/mars_thumbnail.jpg',
+        '/pwa_icon.png',
+        '/thundercat.jpg',
     ]);
 };
 
@@ -47,10 +47,15 @@ const checkResponse = (request) => {
 
 const addToCache = async (request) => {
     const cache = await caches.open("offline");
-    const response = await fetch(request);
-    console.log(response.url + " was cached");
-
-    return await cache.put(request, response);
+    try {
+        const response = await fetch(request);
+        console.log(response.url + " was cached");
+        return await cache.put(request, response);
+    }
+    catch (error) {
+        console.log("Error caching " + request.url);
+        return null;
+    }
 };
 
 const returnFromCache = async (request) =>{
