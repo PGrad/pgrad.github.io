@@ -16,11 +16,15 @@ const preLoad = async () =>{
         '/index.css',
         '/manifest.json',
         '/Air_and_Space.jpg',
+        '/AI_Teacher.png',
         '/favicon.ico',
         '/mars_texture.jpg',
+        '/moon_texture.jpg',
         '/mars_thumbnail.jpg',
         '/pwa_icon.png',
         '/thundercat.jpg',
+        '/wolfie.png',
+        '/CS114.png',
     ]);
 };
 
@@ -47,6 +51,18 @@ const checkResponse = (request) => {
 
 const addToCache = async (request) => {
     const cache = await caches.open("offline");
+    const blocked_urls = [
+        '/AI_Teacher',
+        '/HiddenGems',
+        '/CS114_Final',
+        '/WolfiesEscape'
+    ];
+
+    if (blocked_urls.some(url => request.url.includes(url))) {
+        console.log("Blocked URL: " + request.url);
+        return null;
+    }
+
     try {
         const response = await fetch(request);
         console.log(response.url + " was cached");

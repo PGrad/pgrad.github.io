@@ -80,25 +80,25 @@ const categories: Category[] = [
         name: "Hidden Gems",
         link: "HiddenGems",
         external: false,
-        idx: 1,
+        idx: 0,
       },
       {
         name: "AI Teacher",
         link: "AI_Teacher",
         external: false,
-        idx: 2,
+        idx: 1,
       },
       {
         name: "Wolfie's Escape",
         link: "WolfiesEscape",
         external: false,
-        idx: 3,
+        idx: 2,
       },
       {
         name: "3D Raymarching",
         link: "CS114_Final",
         external: false,
-        idx: 4,
+        idx: 3,
       },
     ],
   },
@@ -175,6 +175,7 @@ function App() {
               <Link
                 spy
                 smooth
+                offset={-100}
                 className="bare-link title"
                 to="home"
                 onSetActive={setSelected}
@@ -189,6 +190,7 @@ function App() {
                         onSetActive={setSelected}
                         spy
                         smooth
+                        offset={-100}
                         activeClass="sel-link"
                         className="bare-link link"
                         to={project.link}
@@ -229,11 +231,20 @@ function App() {
             <Element name="home">
               <Homepage />
             </Element>
-            {onlyProjects().map((project, idx) => (
-              <Element key={idx} name={project.link} style={{ zIndex: 2 }}>
-                <Host project={project} />
-              </Element>
-            ))}
+            <div style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "10em",
+              marginTop: "10em",
+              marginBottom: "10em",
+              placeContent: "center",
+            }}>
+              {onlyProjects().map((project, idx) => (
+                <Element key={idx} name={project.link} style={{ zIndex: 2 }}>
+                  <Host project={project} />
+                </Element>
+              ))}
+            </div>
         </Main>
         <Drawer
           sx={{
