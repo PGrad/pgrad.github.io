@@ -10,7 +10,18 @@ const preLoad = async () =>{
     const cache = await caches.open("offline");
     console.log("caching index and important routes");
 
-    return await cache.addAll(["/", OFFLINE_URL]);
+    return await cache.addAll([
+        "/",
+        OFFLINE_URL,
+        'index.css',
+        'manifest.json',
+        'Air_and_Space.jpg',
+        'favicon.ico',
+        'mars_texture.jpg',
+        'mars_thumbnail.jpg',
+        'pwa_icon.png',
+        'thundercat.jpg',
+    ]);
 };
 
 self.addEventListener("fetch", (event) => {
