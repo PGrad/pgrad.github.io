@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@astrojs/node": "^9.2.0",
+    "@astrojs/netlify": "^6.3.0",
     "@astrojs/react": "^4.2.4",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
