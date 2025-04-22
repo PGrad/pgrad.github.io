@@ -1,6 +1,7 @@
 ---
 import "../index.css";
 import App from "../App";
+const PUBLIC_URL = 'https://paulgrad.netlify.app';
 ---
 
 <!DOCTYPE html>
@@ -39,7 +40,7 @@ import App from "../App";
     />
 
     <!-- Facebook Meta Tags -->
-    <meta property="og:url" content="https://pgrad.github.io/" />
+    <meta property="og:url" content=`${PUBLIC_URL}` />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Paul's Projects" />
     <meta
@@ -48,13 +49,13 @@ import App from "../App";
     />
     <meta
       property="og:image"
-      content="https://pgrad.github.io/mars_thumbnail.png"
+      content=`${PUBLIC_URL}/mars_thumbnail.png`
     />
 
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta property="twitter:domain" content="pgrad.github.io" />
-    <meta property="twitter:url" content="https://pgrad.github.io/" />
+    <meta property="twitter:domain" content=`${PUBLIC_URL}` />
+    <meta property="twitter:url" content=`${PUBLIC_URL}` />
     <meta name="twitter:title" content="Paul's Projects" />
     <meta
       name="twitter:description"
@@ -62,7 +63,7 @@ import App from "../App";
     />
     <meta
       name="twitter:image"
-      content="https://pgrad.github.io/mars_thumbnail.png"
+      content=`${PUBLIC_URL}/mars_thumbnail.png`
     />
 
     <!-- Meta Tags Generated via https://www.opengraph.xyz -->
