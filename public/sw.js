@@ -1,12 +1,6 @@
 const OFFLINE_URL = "/index.html";
 
-const blocked_urls = [
-    '/AI_Teacher',
-    '/HiddenGems',
-    '/CS114_Final',
-    '/WolfiesEscape'
-];
-
+ck
 self.addEventListener("install", (event) => {
     event.waitUntil(preLoad());
 });
@@ -25,11 +19,11 @@ const preLoad = async () =>{
         '/Air_and_Space.jpg',
         '/AI_Teacher.png',
         '/favicon.ico',
-        '/mars_texture.jpg',
+        '/mars_texture.png',
         '/moon_texture.jpg',
         '/mars_thumbnail.jpg',
         '/pwa_icon.png',
-        '/thundercat.jpg',
+        '/thundercat.png',
         '/wolfie.png',
         '/CS114.png',
     ]);
@@ -58,10 +52,6 @@ const checkResponse = (request) => {
 
 const addToCache = async (request) => {
     const cache = await caches.open("offline");
-    if (blocked_urls.some(url => request.url === url)) {
-        console.log("Blocked URL: " + request.url);
-        return null;
-    }
 
     try {
         const response = await fetch(request);
