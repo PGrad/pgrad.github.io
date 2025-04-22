@@ -5,7 +5,7 @@ import netlify from '@astrojs/netlify';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://pgrad.github.io',
+  site: 'https://paulgrad.netlify.app/',
   integrations: [react(), AstroPWA()],
   adapter: netlify({
     edgeMiddleware: true,
