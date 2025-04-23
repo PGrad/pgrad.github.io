@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import Head from '../components/Head.astro';
+import NavigateButton from '../NavigateButton';
 
 type Props = CollectionEntry<'blog'>['data'];
 
@@ -54,6 +55,7 @@ const { title, heroImage } = Astro.props;
 	</head>
 
 	<body>
+		<NavigateButton route="/blog" left />
 		<main>
 			<article class="article">
 				<div class="hero-image">

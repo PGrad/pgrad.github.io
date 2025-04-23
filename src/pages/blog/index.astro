@@ -1,6 +1,7 @@
 ---
 import Head from '../../components/Head.astro';
 import { getCollection } from 'astro:content';
+import NavigateButton from '../../NavigateButton';
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
@@ -14,9 +15,9 @@ const posts = (await getCollection('blog')).sort(
 		<style>
 			body {
 				height: 100vh;
+				background-color: gainsboro;
 			}
 			main {
-				background-color: gainsboro;
 				border-radius: 5px;
 				padding-top: 1rem;
 				width: 100%;
@@ -88,6 +89,7 @@ const posts = (await getCollection('blog')).sort(
 		</style>
 	</head>
 	<body>
+		<NavigateButton route="/" left />
 		<main>
 			<section>
 				<ul>

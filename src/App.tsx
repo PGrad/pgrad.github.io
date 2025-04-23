@@ -20,6 +20,7 @@ import Homepage from "./homepage";
 import Host from "./Host";
 import "./App.css";
 import { Category, Project } from "./types";
+import NavigateButton from "./NavigateButton";
 
 
 const drawerWidth = 240;
@@ -153,25 +154,10 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <IconButton
-        href="/blog"
-        sx={{
-          position: "sticky",
-          top: "50%",
-          left: "90%",
-          zIndex: 3,
-          backgroundColor: "white",
-          "&:hover": {
-            backgroundColor: "gray",
-          }
-        }}
-      >
-        <ChevronRightIcon
-          sx={{
-            color: "black",
-          }}
-        />
-      </IconButton>
+      <NavigateButton
+        route="/blog"
+        left={false}
+      />
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <AppBar position="fixed" open={open} sx={{marginBottom: "5em" }}>
