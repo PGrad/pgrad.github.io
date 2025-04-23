@@ -123,33 +123,31 @@ export default function Homepage() {
     return unmount;
   }, [dimensions, useDarkTheme]);
   return (
-    <main id="homepage-main">
-      <section className="homepage">
-        <div className="avatar-card">
-          <Avatar />
-          <div className="socials fade-in">
-            <SocialIcon
-              className="icon"
-              fgColor="white"
-              url="https://github.com/PGrad"
-            />
-            <SocialIcon
-              className="icon"
-              fgColor="white"
-              url="https://www.linkedin.com/in/paulgrad3/"
-            />
-          </div>
+    <section id="homepage-main" className="homepage">
+      <div className="avatar-card">
+        <Avatar />
+        <div className="socials fade-in">
+          <SocialIcon
+            className="icon"
+            fgColor="white"
+            url="https://github.com/PGrad"
+          />
+          <SocialIcon
+            className="icon"
+            fgColor="white"
+            url="https://www.linkedin.com/in/paulgrad3/"
+          />
         </div>
-        <section className="intro">
-          <div className="flavor-text">
-            <p>Frontend Web Developer based out of Oakland, CA.</p>
-            <p>Interested in UI design, languages, space, and cats.</p>
-          </div>
-          <a className="resume fade-in" href="https://bit.ly/3Z0H3PK">
-            Resumé
-          </a>
-        </section>
+      </div>
+      <section className="intro">
+        <div className="flavor-text">
+          <p>Frontend Web Developer based out of Oakland, CA.</p>
+          <p>Interested in UI design, languages, space, and cats.</p>
+        </div>
+        <a className="resume fade-in" href="https://bit.ly/3Z0H3PK">
+          Resumé
+        </a>
       </section>
-    </main>
+    </section>
   );
 }

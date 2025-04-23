@@ -1,72 +1,13 @@
 ---
 import "../index.css";
 import App from "../App";
-const PUBLIC_URL = 'https://paulgrad.netlify.app';
+import Head from "../components/Head.astro";
 ---
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="/favicon.ico" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Orbitron"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Work+Sans"
-      rel="stylesheet"
-    />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <link rel="preload" as="image" href="Air_and_Space.jpg" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="/manifest.webmanifest">
-
-    <!-- HTML Meta Tags -->
-    <title>Paul's Projects</title>
-    <meta
-      name="description"
-      content="The personal website of Paul Grad, a Frontend Developer based in Oakland, CA"
-    />
-
-    <!-- Facebook Meta Tags -->
-    <meta property="og:url" content=`${PUBLIC_URL}` />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Paul's Projects" />
-    <meta
-      property="og:description"
-      content="The personal website of Paul Grad, a Frontend Developer based in Oakland, CA"
-    />
-    <meta
-      property="og:image"
-      content=`${PUBLIC_URL}/mars_thumbnail.png`
-    />
-
-    <!-- Twitter Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta property="twitter:domain" content=`${PUBLIC_URL}` />
-    <meta property="twitter:url" content=`${PUBLIC_URL}` />
-    <meta name="twitter:title" content="Paul's Projects" />
-    <meta
-      name="twitter:description"
-      content="The personal website of Paul Grad, a Frontend Developer based in Oakland, CA"
-    />
-    <meta
-      name="twitter:image"
-      content=`${PUBLIC_URL}/mars_thumbnail.png`
-    />
-
-    <!-- Meta Tags Generated via https://www.opengraph.xyz -->
+    <Head/>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

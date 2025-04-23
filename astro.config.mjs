@@ -2,11 +2,20 @@ import AstroPWA from '@vite-pwa/astro'
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import netlify from '@astrojs/netlify';
+import mdx from '@astrojs/mdx';
+import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://paulgrad.netlify.app/',
   integrations: [react(),
+    // allows for the use of MDX in Astro
+    // to write blog posts.
+    mdx(),
+    // automatically generates a sitemap https://docs.astro.build/en/guides/integrations-guide/sitemap/
+    sitemap(), 
+    // adds PWA support to the site.
+    // automatically generates the manifest and service worker.
     AstroPWA({
       mode: 'development',
       base: '/',
@@ -49,6 +58,8 @@ export default defineConfig({
       },
     })
   ],
+  // adapter builds for Netlify deploys,
+  // and allows for use of edge functions.
   adapter: netlify({
     edgeMiddleware: true,
   }),
