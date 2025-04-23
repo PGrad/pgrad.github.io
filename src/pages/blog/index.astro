@@ -27,14 +27,29 @@ const posts = (await getCollection('blog')).sort(
 				display: flex;
 				flex-wrap: wrap;
 				gap: 2rem;
-				align-items: center;
+				place-content: center;
 				list-style-type: none;
 				margin: 0;
 				padding: 0;
 			}
 			ul li {
-				width: 100%;
+				transform: skew(5deg);
+				width: fit-content;
 				padding: 0 .5rem;
+				background-color: black;
+				padding: 1rem;
+				box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+				margin: 0 1rem;
+				animation: 2s ease-in slide-in;
+			}
+			@keyframes slide-in {
+				from {
+					translate: 150vw 0;
+				}
+
+				to {
+					translate: 0 0;
+				}
 			}
 			ul li * {
 				text-decoration: none;
