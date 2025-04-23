@@ -18,7 +18,7 @@ export default function NavigateButton({ route, left }: NavigateButtonProps) {
         href={route}
         sx={[
             {
-                position: "sticky",
+                position: "fixed",
                 top: "50%",
                 zIndex: 3,
                 backgroundColor: "white",

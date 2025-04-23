@@ -15,7 +15,11 @@ const posts = (await getCollection('blog')).sort(
 		<style>
 			body {
 				height: 100vh;
-				background-color: gainsboro;
+				background: linear-gradient(
+					to bottom,
+					white 0%,
+					gainsboro 100%
+				);
 			}
 			main {
 				border-radius: 5px;
@@ -42,20 +46,22 @@ const posts = (await getCollection('blog')).sort(
 			ul li {
 				transform: skew(5deg);
 				width: fit-content;
-				padding: 0 .5rem;
-				background-color: black;
-				padding: 1rem;
+				background-color: aliceblue;
 				box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 				margin: 0 1rem;
-				animation: 2s ease-in slide-in;
+				animation: 2s infinite ease-in alternate dance;
 			}
-			@keyframes slide-in {
+			ul li:hover {
+				background-color: transparent;
+				animation-play-state: paused;
+			}
+			@keyframes dance {
 				from {
-					translate: 150vw 0;
+					transform: skew(5deg) translate(0, 0);
 				}
 
 				to {
-					translate: 0 0;
+					transform: skew(-5deg) translate(0, 0);
 				}
 			}
 			ul li * {
@@ -71,8 +77,7 @@ const posts = (await getCollection('blog')).sort(
 			}
 			ul li img {
 				margin-bottom: 0.5rem;
-				border-radius: 12px;
-				max-width: 100%;
+				width: 100%;
 			}
 			ul li a {
 				display: block;
@@ -103,6 +108,15 @@ const posts = (await getCollection('blog')).sort(
 					font-size: 1.563em;
 				}
 			}
+			a:link {
+				color: orange;
+			}
+			a:hover {
+				color: blue;
+			}
+			a:visited {
+				color: darkorange;
+			}
 		</style>
 	</head>
 	<body>
@@ -114,7 +128,7 @@ const posts = (await getCollection('blog')).sort(
 					{
 						posts.map((post) => (
 							<li>
-								<a href={`/blog/${post.id}/`}>
+								<a href={`/blog/${post.id}/`} class="link">
 									<img src={post.data.heroImage} alt="No image" />
 									<h4 class="title">{post.data.title}</h4>
 								</a>
