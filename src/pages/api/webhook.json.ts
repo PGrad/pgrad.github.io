@@ -1,3 +1,4 @@
+export const prerender = false;
 import { purgeCache } from "@netlify/functions";
 
 export async function POST({ request }) {
@@ -7,7 +8,12 @@ export async function POST({ request }) {
   if (request.headers.get("X-Contentful-Webhook-Secret") !== import.meta.env.CONTENTFUL_WEBHOOK_SECRET) {
     return new Response(JSON.stringify({
         message: "Unauthorized"
-    }), { status: 401 });
+    }), {
+        status: 401,
+        headers: {
+            "Content-Type": "application/json",
+        }
+    });
   }
 
   // Refresh specific pages on publish, but all refresh
@@ -16,5 +22,10 @@ export async function POST({ request }) {
 
   return new Response(JSON.stringify({
     message: `Revalidated entry with id ${body.sys.id}`,
-  }), { status: 200 });
+  }), {
+    status: 200,
+    headers: {
+        "Content-Type": "application/json",
+    }
+  });
 }
