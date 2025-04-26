@@ -1,29 +1,36 @@
 ---
+// I'm going to use SSR, because
+// the CMS content can change.
+export const prerender = false;
+
 import { markdown } from '@astropub/md'
 import { contentfulClient } from "../../lib/contentful";
 import type { BlogPost } from "../../lib/contentful";
 import Post from "../../layouts/BlogPost.astro";
 
-export async function getStaticPaths() {
-	const { items } = await contentfulClient.getEntries<BlogPost>({
+const { slug } = Astro.params;
+let post;
+
+try {
+	const data = await contentfulClient.getEntries<BlogPost>({
 		content_type: "markdownPage",
+		'fields.slug': slug
 	});
 
-	return items.map(item => ({
-		params: { slug: item.fields.slug },
-		props: {
-			title: item.fields.title,
-			content: item.fields.content,
-			img: item.fields.heroImage,
-			description: item.fields.description,
-			id: item.sys.id,
-		},
-	}));
+	const item = data.items[0];
+	const img = await contentfulClient.getAsset(item.fields.heroImage.sys.id);
+	post = {
+		title: item.fields.title,
+		content: item.fields.content,
+		heroImage: img?.fields?.file?.url ?? '',
+		description: item.fields.description,
+		id: item.sys.id,
+	};
+} catch (error) {
+	return Astro.redirect("/404");
 }
 
-const { content, img, id, ...data } = Astro.props;
-
-const heroImage = (await contentfulClient.getAsset(img.sys.id))?.fields?.file?.url;
+const { content, id, ...data } = post;
 
 // The browser should always check freshness
 Astro.response.headers.set("cache-control", "public, max-age=0, must-revalidate");
@@ -31,11 +38,11 @@ Astro.response.headers.set("cache-control", "public, max-age=0, must-revalidate"
 // The CDN should cache for a year, but revalidate if the cache tag changes
 Astro.response.headers.set("netlify-cdn-cache-control", "s-maxage=31536000");
 
-// Tag the page with the slug - the webhook will update the page with this slug.
-Astro.response.headers.set("netlify-cache-tag", `${id}`);
+// Tag the page with the version number
+Astro.response.headers.set("netlify-cache-tag", id);
 ---
 
-<Post heroImage={heroImage} {...data}>
+<Post {...data}>
 	{
 		await markdown(content)
 	}
