@@ -18,10 +18,12 @@ export async function POST({ request }) {
     });
   }
 
-  console.log("Good request");
+  console.log("Now purging cache for", body.sys.id);
   // Refresh specific pages on publish, but all refresh
   // the entire collection on delete, new items etc.
   await purgeCache({ tags: [body.sys.id, "markdownPage"] });
+
+  console.log("Cache purged for", body.sys.id);
 
   return new Response(JSON.stringify({
     message: `Revalidated entry with id ${body.sys.id}`,
