@@ -16,12 +16,12 @@ export async function getStaticPaths() {
 			content: item.fields.content,
 			img: item.fields.heroImage,
 			description: item.fields.description,
-			slug: item.fields.slug,
+			id: item.sys.id,
 		},
 	}));
 }
 
-const { content, img, slug, ...data } = Astro.props;
+const { content, img, id, ...data } = Astro.props;
 
 const heroImage = (await contentfulClient.getAsset(img.sys.id))?.fields?.file?.url;
 
@@ -32,7 +32,7 @@ Astro.response.headers.set("cache-control", "public, max-age=0, must-revalidate"
 Astro.response.headers.set("netlify-cdn-cache-control", "s-maxage=31536000");
 
 // Tag the page with the slug - the webhook will update the page with this slug.
-Astro.response.headers.set("netlify-cache-tag", `${slug}`);
+Astro.response.headers.set("netlify-cache-tag", `${id}`);
 ---
 
 <Post heroImage={heroImage} {...data}>
