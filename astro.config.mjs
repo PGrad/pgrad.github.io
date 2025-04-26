@@ -50,12 +50,6 @@ export default defineConfig({
         globPatterns: ['**/*.{css,js,ts,json,html,svg,jpg,png,ico,txt}'],
         navigateFallbackDenylist: [/^\/api/, /^\/blog/],
         runtimeCaching: [{
-          urlPattern: url => url.origin === 'https://paulgrad.netlify.app',
-          handler: 'StaleWhileRevalidate',
-          options: {
-            cacheName: 'page-cache',
-          },
-        }, {
           urlPattern: /api/,
           handler: 'NetworkFirst',
           options: {
