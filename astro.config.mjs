@@ -48,6 +48,7 @@ export default defineConfig({
         navigateFallback: '/',
         maximumFileSizeToCacheInBytes: 3000000,
         globPatterns: ['**/*.{css,js,ts,json,html,svg,jpg,png,ico,txt}'],
+        navigateFallbackDenylist: [/^\/api/],
       },
       devOptions: {
         enabled: true,
