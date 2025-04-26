@@ -1,36 +1,31 @@
 ---
-// I'm going to use SSR, because
-// the CMS content can change.
-export const prerender = false;
-
 import { markdown } from '@astropub/md'
 import { contentfulClient } from "../../lib/contentful";
 import type { BlogPost } from "../../lib/contentful";
 import Post from "../../layouts/BlogPost.astro";
 
-const { slug } = Astro.params;
-let post;
-
-try {
-	const data = await contentfulClient.getEntries<BlogPost>({
+export async function getStaticPaths() {
+	const { items } = await contentfulClient.getEntries<BlogPost>({
 		content_type: "markdownPage",
-		'fields.slug': slug
 	});
 
-	const item = data.items[0];
-	const img = await contentfulClient.getAsset(item.fields.heroImage.sys.id);
-	post = {
-		title: item.fields.title,
-		content: item.fields.content,
-		heroImage: img?.fields?.file?.url ?? '',
-		description: item.fields.description,
-		version: item.sys.publishedVersion,
-	};
-} catch (error) {
-	return Astro.redirect("/404");
+	return items.map(item => ({
+		params: { slug: item.fields.slug },
+		props: {
+			title: item.fields.title,
+			content: item.fields.content,
+			img: item.fields.heroImage,
+			description: item.fields.description,
+			version: item.sys.publishedVersion,
+		},
+	}));
 }
 
-const { content, version, ...data } = post;
+const { content, version, img, ...data } = Astro.props;
+
+console.log(img.sys.id);
+
+const heroImage = (await contentfulClient.getAsset(img.sys.id))?.fields?.file?.url;
 
 // The browser should always check freshness
 Astro.response.headers.set("cache-control", "public, max-age=0, must-revalidate");
@@ -42,7 +37,7 @@ Astro.response.headers.set("netlify-cdn-cache-control", "s-maxage=31536000");
 Astro.response.headers.set("netlify-cache-tag", `${version}`);
 ---
 
-<Post {...data}>
+<Post heroImage={heroImage} {...data}>
 	{
 		await markdown(content)
 	}
