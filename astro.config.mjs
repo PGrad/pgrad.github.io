@@ -48,10 +48,10 @@ export default defineConfig({
         navigateFallback: '/',
         maximumFileSizeToCacheInBytes: 3000000,
         globPatterns: ['**/*.{css,js,ts,json,html,svg,jpg,png,ico,txt}'],
-        navigateFallbackDenylist: [/^\/api/],
+        navigateFallbackDenylist: [/^\/api/, /^\/blog/],
         runtimeCaching: [{
           urlPattern: url => url.origin === 'https://paulgrad.netlify.app',
-          handler: 'NetworkFirst',
+          handler: 'StaleWhileRevalidate',
           options: {
             cacheName: 'page-cache',
           },
