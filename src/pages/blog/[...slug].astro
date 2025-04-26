@@ -1,20 +1,50 @@
 ---
-import { type CollectionEntry, getCollection, render } from 'astro:content';
-import BlogPost from '../../layouts/BlogPost.astro';
+// Sets the number of seconds to cache the page in the ☝️ browser and ☝️ the CDN
+// I'm going to use SSR, because
+// the CMS content can change.
+export const prerender = false;
 
-export async function getStaticPaths() {
-	const posts = await getCollection('blog');
-	return posts.map((post) => ({
-		params: { slug: post.id },
-		props: post,
-	}));
+import { markdown } from '@astropub/md'
+import { contentfulClient } from "../../lib/contentful";
+import type { BlogPost } from "../../lib/contentful";
+import Post from "../../layouts/BlogPost.astro";
+
+const { slug } = Astro.params;
+let post;
+
+try {
+	const data = await contentfulClient.getEntries<BlogPost>({
+		content_type: "markdownPage",
+		'fields.slug': slug
+	});
+
+	const item = data.items[0];
+	const img = await contentfulClient.getAsset(item.fields.heroImage.sys.id);
+	post = {
+		title: item.fields.title,
+		content: item.fields.content,
+		heroImage: img?.fields?.file?.url ?? '',
+		description: item.fields.description,
+		version: item.sys.publishedVersion,
+	};
+} catch (error) {
+	return Astro.redirect("/404");
 }
-type Props = CollectionEntry<'blog'>;
 
-const post = Astro.props;
-const { Content } = await render(post);
+const { content, version, ...data } = post;
+
+// The browser should always check freshness
+Astro.response.headers.set("cache-control", "public, max-age=0, must-revalidate");
+
+// The CDN should cache for a year, but revalidate if the cache tag changes
+Astro.response.headers.set("netlify-cdn-cache-control", "s-maxage=31536000");
+
+// Tag the page with the version number
+Astro.response.headers.set("netlify-cache-tag", `${version}`);
 ---
 
-<BlogPost {...post.data}>
-	<Content />
-</BlogPost>
+<Post {...data}>
+	{
+		await markdown(content)
+	}
+</Post>

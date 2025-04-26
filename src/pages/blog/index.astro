@@ -1,11 +1,17 @@
 ---
-import Head from '../../components/Head.astro';
-import { getCollection } from 'astro:content';
-import NavigateButton from '../../NavigateButton';
+export const prerender = false;
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+import Head from '../../components/Head.astro';
+import NavigateButton from '../../NavigateButton';
+import type { BlogPost } from '../../lib/contentful';
+
+import { contentfulClient } from "../../lib/contentful";
+
+const entries = await contentfulClient.getEntries<BlogPost>({
+  content_type: "markdownPage",
+});
+
+const imgs = await contentfulClient.getAssets();
 ---
 
 <!doctype html>
@@ -46,6 +52,8 @@ const posts = (await getCollection('blog')).sort(
 			ul li {
 				transform: skew(5deg);
 				width: fit-content;
+				border-radius: 30px;
+				overflow: hidden;
 				background-color: aliceblue;
 				box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 				margin: 0 1rem;
@@ -80,7 +88,12 @@ const posts = (await getCollection('blog')).sort(
 				width: 100%;
 			}
 			ul li a {
-				display: block;
+				display: flex;
+				height: 100%;
+				background-color: rgba(1, 1, 1, 0.5);
+			}
+			ul li a h4 {
+				margin: auto;
 			}
 			.date {
 				margin: 0;
@@ -112,11 +125,15 @@ const posts = (await getCollection('blog')).sort(
 				color: orange;
 			}
 			a:hover {
-				color: blue;
+				color: red;
 			}
 			a:visited {
 				color: darkorange;
 			}
+
+            img {
+                max-width: 300px;
+            }
 		</style>
 	</head>
 	<body>
@@ -126,11 +143,20 @@ const posts = (await getCollection('blog')).sort(
 			<section>
 				<ul>
 					{
-						posts.map((post) => (
-							<li>
-								<a href={`/blog/${post.id}/`} class="link">
-									<img src={post.data.heroImage} alt="No image" />
-									<h4 class="title">{post.data.title}</h4>
+						entries.items.map((post) => (
+							<li 
+								style={post.fields.heroImage?.sys.id && {
+									backgroundImage: `url(${imgs.items.find((img) => img.sys.id === post.fields.heroImage?.sys.id)?.fields?.file?.url})`,
+									backgroundRepeat: "no-repeat, repeat",
+									backgroundSize: "cover",
+									width: "500px",
+									height: "300px",
+								}}
+							>
+								<a
+									href={`/blog/${post.fields.slug}`} class="link"
+								>
+									<h4 class="title">{post.fields.title}</h4>
 								</a>
 							</li>
 						))

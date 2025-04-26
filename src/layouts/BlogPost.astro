@@ -1,11 +1,8 @@
 ---
-import type { CollectionEntry } from 'astro:content';
 import Head from '../components/Head.astro';
 import NavigateButton from '../NavigateButton';
 
-type Props = CollectionEntry<'blog'>['data'];
-
-const { title, heroImage } = Astro.props;
+const { title, heroImage, description } = Astro.props;
 ---
 
 <html lang="en">
@@ -26,7 +23,7 @@ const { title, heroImage } = Astro.props;
 			.hero-image img {
 				display: block;
 				border-radius: 12px;
-                max-width: 100%;
+                max-width: 300px;
 				box-shadow: var(--box-shadow);
 			}
 			.prose {
@@ -59,7 +56,7 @@ const { title, heroImage } = Astro.props;
 		<main>
 			<article class="article">
 				<div class="hero-image">
-					{heroImage && <img src={heroImage} alt="" />}
+					{heroImage && <img src={heroImage} alt={description} />}
 				</div>
 				<div class="prose">
 					<div class="title">
