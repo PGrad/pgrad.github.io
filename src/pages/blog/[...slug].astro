@@ -1,4 +1,8 @@
 ---
+// I'm going to use SSR, because
+// the CMS content can change.
+export const prerender = false;
+
 import { markdown } from '@astropub/md'
 import { contentfulClient } from "../../lib/contentful";
 import type { BlogPost } from "../../lib/contentful";
