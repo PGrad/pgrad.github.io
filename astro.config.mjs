@@ -51,7 +51,7 @@ export default defineConfig({
         navigateFallbackDenylist: [/^\/api/],
         runtimeCaching: [{
           urlPattern: url => url.origin === 'https://paulgrad.netlify.app',
-          handler: 'StaleWhileRevalidate',
+          handler: 'NetworkFirst',
           options: {
             cacheName: 'page-cache',
           },
