@@ -23,8 +23,6 @@ export async function getStaticPaths() {
 
 const { content, version, img, ...data } = Astro.props;
 
-console.log(img.sys.id);
-
 const heroImage = (await contentfulClient.getAsset(img.sys.id))?.fields?.file?.url;
 
 // The browser should always check freshness
