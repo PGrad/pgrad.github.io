@@ -141,7 +141,7 @@ export default function Homepage() {
             network="rss"
             className="icon"
             fgColor="white"
-            url="/feed"
+            url="/rss.xml"
           />
         </div>
       </div>
