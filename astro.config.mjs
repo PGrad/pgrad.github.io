@@ -48,7 +48,10 @@ export default defineConfig({
         navigateFallback: '/',
         maximumFileSizeToCacheInBytes: 3000000,
         globPatterns: ['**/*.{css,js,ts,json,html,svg,jpg,png,ico,txt}'],
-        navigateFallbackDenylist: [/^\/api/, /^\/blog/],
+        // The fallback page is used when the user is offline and tries to access a page that is not in the cache.
+        // The fallback page is the home page, and this can cause a confusing user experience
+        // when they're trying to access a page that's not the home page.
+        navigateFallbackDenylist: [/^\/api/, /^\/blog/, /^\/rss/],
         runtimeCaching: [{
           urlPattern: /api/,
           handler: 'NetworkFirst',

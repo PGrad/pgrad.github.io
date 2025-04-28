@@ -1,17 +1,13 @@
 ---
 export const prerender = false;
+import * as contentful from "contentful";
 
 import Head from '../../components/Head.astro';
 import NavigateButton from '../../NavigateButton';
-import type { BlogPost } from '../../lib/contentful';
+import { getEntries, getImgs, getHeroImgId } from '../../lib/contentful';
 
-import { contentfulClient } from "../../lib/contentful";
-
-const entries = await contentfulClient.getEntries<BlogPost>({
-  content_type: "markdownPage",
-});
-
-const imgs = await contentfulClient.getAssets();
+const entries = await getEntries();
+const imgMap = await getImgs();
 
 // The browser should always check freshness
 Astro.response.headers.set("cache-control", "public, max-age=0, must-revalidate");
@@ -154,8 +150,8 @@ Astro.response.headers.set("netlify-cache-tag", "markdownPage");
 					{
 						entries.items.map((post) => (
 							<li 
-								style={post.fields.heroImage?.sys.id && {
-									backgroundImage: `url(${imgs.items.find((img) => img.sys.id === post.fields.heroImage?.sys.id)?.fields?.file?.url})`,
+								style={(post.fields.heroImage?.sys as contentful.AssetSys).id && {
+									backgroundImage: `url(${imgMap.get(getHeroImgId(post)) ?? ''})`,
 									backgroundRepeat: "no-repeat, repeat",
 									backgroundSize: "cover",
 									width: "500px",

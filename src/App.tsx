@@ -22,7 +22,6 @@ import "./App.css";
 import { Category, Project } from "./types";
 import NavigateButton from "./NavigateButton";
 
-
 const drawerWidth = 240;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{

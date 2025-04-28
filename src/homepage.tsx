@@ -137,6 +137,12 @@ export default function Homepage() {
             fgColor="white"
             url="https://www.linkedin.com/in/paulgrad3/"
           />
+          <SocialIcon
+            network="rss"
+            className="icon"
+            fgColor="white"
+            url="/feed"
+          />
         </div>
       </div>
       <section className="intro">
