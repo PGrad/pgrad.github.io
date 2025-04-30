@@ -51,7 +51,7 @@ export default defineConfig({
         // The fallback page is used when the user is offline and tries to access a page that is not in the cache.
         // The fallback page is the home page, and this can cause a confusing user experience
         // when they're trying to access a page that's not the home page.
-        navigateFallbackDenylist: [/^\/api/, /^\/blog/, /^\/rss/],
+        navigateFallbackDenylist: [/^\/api/, /^\/blog/, /^\/rss/, /\/feed/],
         runtimeCaching: [{
           urlPattern: /api/,
           handler: 'NetworkFirst',
