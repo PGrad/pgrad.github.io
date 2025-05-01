@@ -8,6 +8,14 @@ const { title, heroImage, description } = Astro.props;
 <html lang="en">
 	<head>
         <Head />
+		<meta
+			property="og:image"
+			content={heroImage}
+		/>
+		<meta
+			name="twitter:image"
+			content={heroImage}
+		/>
 		<style>
 			main {
 				padding-top: 1rem;
