@@ -2,12 +2,14 @@
 import "../index.css";
 import App from "../App";
 import Head from "../components/Head.astro";
+import { PUBLIC_URL } from "../constants"
 ---
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <Head/>
+    <meta property="og:type" content="website" />
     <meta
         property="og:image"
         content="/mars_thumbnail.png"
@@ -16,6 +18,10 @@ import Head from "../components/Head.astro";
         name="twitter:image"
         content="/mars_thumbnail.png"
     />
+    <meta property="og:url" content=`${PUBLIC_URL}` />
+    <meta property="twitter:url" content=`${PUBLIC_URL}` />
+    <meta property="og:title" content="Paul's Projects" />
+    <meta name="twitter:title" content="Paul's Projects" />
     <link rel="preload" as="image" href="Air_and_Space.jpg" />
   </head>
   <body>

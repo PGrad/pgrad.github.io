@@ -25,6 +25,7 @@ try {
 		heroImage: img?.fields?.file?.url ?? '',
 		description: item.fields.description,
 		id: item.sys.id,
+		slug: item.fields.slug,
 	};
 } catch (error) {
 	return Astro.redirect("/404");

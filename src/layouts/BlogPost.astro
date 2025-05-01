@@ -1,8 +1,9 @@
 ---
 import Head from '../components/Head.astro';
 import NavigateButton from '../NavigateButton';
+import { PUBLIC_URL } from "../constants"
 
-const { title, heroImage, description } = Astro.props;
+const { title, heroImage, description, slug } = Astro.props;
 ---
 
 <html lang="en">
@@ -16,6 +17,11 @@ const { title, heroImage, description } = Astro.props;
 			name="twitter:image"
 			content={heroImage}
 		/>
+		<meta property="og:url" content=`${PUBLIC_URL}/blog/${slug}` />
+		<meta property="twitter:url" content=`${PUBLIC_URL}/blog/${slug}` />
+    	<meta property="og:type" content="article" />
+		<meta property="og:title" content={title} />
+		<meta name="twitter:title" content={title} />
 		<style>
 			main {
 				padding-top: 1rem;
