@@ -156,6 +156,7 @@ function App() {
       <NavigateButton
         route="/blog"
         left={false}
+        light={!prefersDarkMode}
       />
       <Box sx={{ display: "flex" }}>
         <CssBaseline />

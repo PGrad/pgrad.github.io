@@ -5,23 +5,27 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 interface NavigateButtonProps {
     route: string;
     left?: boolean;
+    light?: boolean;
 };
 
-export default function NavigateButton({ route, left }: NavigateButtonProps) {
+export default function NavigateButton({ route, left, light = true }: NavigateButtonProps) {
     const leftProp = {
-        left: "0%",
+        left: 0,
     };
     const rightProp = {
-        left: "90%",
+        right: 0,
     };
     return <IconButton
         href={route}
         sx={[
             {
+                borderRadius: 0,
+                padding: 0,
                 position: "fixed",
-                top: "50%",
+                height: "30vh",
+                top: "40%",
                 zIndex: 3,
-                backgroundColor: "white",
+                backgroundColor: "transparent",
                 "&:hover": {
                     backgroundColor: "gray",
                 }
@@ -32,12 +36,12 @@ export default function NavigateButton({ route, left }: NavigateButtonProps) {
         {left ?
             <ChevronLeftIcon
                 sx={{
-                    color: "black",
+                    color: light ? "black" : "white",
                 }}
             />
             :<ChevronRightIcon
                 sx={{
-                    color: "black",
+                    color: light ? "black" : "white",
                 }}
             />
         }
