@@ -96,7 +96,7 @@ Astro.response.headers.set("netlify-cache-tag", "markdownPage");
 			ul li a {
 				display: flex;
 				height: 100%;
-				background-color: rgba(1, 1, 1, 0.5);
+				background-color: rgba(1, 1, 1, 0.7);
 			}
 			ul li a h4 {
 				margin: auto;
@@ -133,6 +133,10 @@ Astro.response.headers.set("netlify-cache-tag", "markdownPage");
 			a:hover {
 				color: red;
 			}
+
+			a:focus {
+				color: red;
+			}
 			a:visited {
 				color: darkorange;
 			}
@@ -143,7 +147,7 @@ Astro.response.headers.set("netlify-cache-tag", "markdownPage");
 		</style>
 	</head>
 	<body>
-		<NavigateButton route="/" left />
+		<NavigateButton route="/" left label="Go to Home" />
 		<main>
 			<h1 class="blog-title">Blog</h1>
 			<section>
@@ -161,6 +165,7 @@ Astro.response.headers.set("netlify-cache-tag", "markdownPage");
 							>
 								<a
 									href={`/blog/${post.fields.slug}/`} class="link"
+									tabindex="0"
 								>
 									<h4 class="title">{post.fields.title}</h4>
 								</a>

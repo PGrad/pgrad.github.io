@@ -83,6 +83,7 @@ export default function Homepage() {
       Math.round(dimensions.height)
     );
     renderer.domElement.id = "canvas";
+    renderer.domElement.ariaLabel = useDarkTheme ? "https://www.youtube.com/watch?v=Jmk5frp6-3Q" : "https://www.youtube.com/watch?v=-yv3-X665UY";
     homepage.appendChild(renderer.domElement);
 
     let material = new THREE.MeshBasicMaterial({ color: 0xff0000 });

@@ -46,6 +46,10 @@ li a {
   .not-sel-link:hover {
     background-color: rgba(0, 0, 0, 0.1);
   }
+
+  .not-sel-link:focus {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -54,6 +58,10 @@ li a {
   }
 
   .not-sel-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .not-sel-link:focus {
     background-color: rgba(255, 255, 255, 0.1);
   }
 }
@@ -68,6 +76,11 @@ li a {
   }
   .not-sel-link:hover {
     color: blue;
+    border: 1px solid blue;
+  }
+  .not-sel-link:focus {
+    color: blue;
+    border: 1px solid blue;
   }
 }
 
@@ -77,5 +90,10 @@ li a {
   }
   .not-sel-link:hover {
     color: red;
+    border: 1px solid red;
+  }
+  .not-sel-link:focus {
+    color: red;
+    border: 1px solid red;
   }
 }

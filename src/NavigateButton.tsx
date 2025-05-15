@@ -6,9 +6,10 @@ interface NavigateButtonProps {
     route: string;
     left?: boolean;
     light?: boolean;
+    label: string;
 };
 
-export default function NavigateButton({ route, left, light = true }: NavigateButtonProps) {
+export default function NavigateButton({ route, left, light = true, label }: NavigateButtonProps) {
     const leftProp = {
         left: 0,
     };
@@ -17,6 +18,8 @@ export default function NavigateButton({ route, left, light = true }: NavigateBu
     };
     return <IconButton
         href={route}
+        tabIndex={0}
+        aria-label={label}
         sx={[
             {
                 borderRadius: 0,
@@ -27,6 +30,9 @@ export default function NavigateButton({ route, left, light = true }: NavigateBu
                 zIndex: 3,
                 backgroundColor: "transparent",
                 "&:hover": {
+                    backgroundColor: "gray",
+                },
+                "&:focus": {
                     backgroundColor: "gray",
                 }
             },

@@ -15,7 +15,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
 import { createTheme, Theme, useMediaQuery } from "@mui/material";
-import { Element, Link } from 'react-scroll';
+import { scroller, Element, Link } from 'react-scroll';
 import Homepage from "./homepage";
 import Host from "./Host";
 import "./App.css";
@@ -157,6 +157,7 @@ function App() {
         route="/blog"
         left={false}
         light={!prefersDarkMode}
+        label="Go to Blog"
       />
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
@@ -178,11 +179,20 @@ function App() {
               component="div"
             >
               <Link
+                tabIndex={0}
                 spy
                 smooth
                 offset={-100}
                 className="bare-link title"
                 to="home"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    setSelected("home");
+                    scroller.scrollTo("home", {
+                      smooth: true
+                    });
+                  }
+                }}
                 onSetActive={setSelected}
               >
                 {!atHome ? "Paul's Projects" : "Home"}
@@ -193,12 +203,21 @@ function App() {
                       <Link
                         key={idx}
                         onSetActive={setSelected}
+                        tabIndex={0}
                         spy
                         smooth
                         offset={-100}
                         activeClass="sel-link"
                         className="bare-link link"
                         to={project.link}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            setSelected(project.link);
+                            scroller.scrollTo(project.link, {
+                              smooth: true
+                            });
+                          }
+                        }}
                       >
                         {project.name}
                       </Link>
@@ -211,6 +230,12 @@ function App() {
                 aria-label="open drawer"
                 edge="end"
                 onClick={handleDrawerOpen}
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleDrawerOpen();
+                  }
+                }}
                 sx={{ ...(open && { display: "none" }) }}
               >
                 <MenuIcon />
@@ -286,12 +311,21 @@ function App() {
                     disablePadding
                   >
                     <Link
+                      tabIndex={0}
                       className="bare-link link"
                       onSetActive={setSelected}
                       spy
                       smooth
                       activeClass="sel-link"
                       to={project.link}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          setSelected(project.link);
+                          scroller.scrollTo(project.link, {
+                            smooth: true
+                          });
+                        }
+                      }}
                     >
                       {project.name}
                     </Link>
