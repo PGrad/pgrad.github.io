@@ -10,6 +10,8 @@ import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
+// https://baseweb.design/components/button/
+import { Button as BaseButton } from "baseui/button";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
@@ -153,12 +155,6 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <NavigateButton
-        route="/blog"
-        left={false}
-        light={!prefersDarkMode}
-        label="Go to Blog"
-      />
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <AppBar position="fixed" open={open} sx={{marginBottom: "5em" }}>
@@ -168,6 +164,7 @@ function App() {
               width: "100vw",
             }}
           >
+            <BaseButton className='skip-link' href="#main">Skip to Main Content</BaseButton>
             <Typography
               variant="h6"
               noWrap
@@ -245,7 +242,14 @@ function App() {
             )}
           </Toolbar>
         </AppBar>
+        <NavigateButton
+          route="/blog"
+          left={false}
+          light={!prefersDarkMode}
+          label="Go to Blog"
+        />
         <Main
+          id="main"
           open={open}
           sx={{
             display: "flex",
