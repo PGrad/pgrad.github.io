@@ -4,21 +4,23 @@
 export const prerender = false;
 
 import { markdown } from '@astropub/md'
-import { contentfulClient } from "../../lib/contentful";
-import type { BlogPost } from "../../lib/contentful";
+import { getEntries, useContentfulClient } from "../../lib/contentful";
+import { getHeroImgId } from "../../lib/contentful";
 import Post from "../../layouts/BlogPost.astro";
 
 const { slug } = Astro.params;
 let post;
 
 try {
-	const data = await contentfulClient.getEntries<BlogPost>({
+	const isPreview = Astro.request.url.includes('preview');
+	const contentfulClient = useContentfulClient(isPreview);
+	const data = await getEntries(isPreview, {
 		content_type: "markdownPage",
 		'fields.slug': slug
 	});
 
 	const item = data.items[0];
-	const img = await contentfulClient.getAsset(item.fields.heroImage.sys.id);
+	const img = await contentfulClient.getAsset(getHeroImgId(item));
 	post = {
 		title: item.fields.title,
 		content: item.fields.content,
@@ -45,6 +47,6 @@ Astro.response.headers.set("netlify-cache-tag", id);
 
 <Post {...data}>
 	{
-		await markdown(content)
+		await markdown(content as string)
 	}
 </Post>

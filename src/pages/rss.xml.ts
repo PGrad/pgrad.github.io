@@ -6,9 +6,12 @@ import * as contentful from "contentful";
 import { getEntries, getImgs, getHeroImgId, BlogPost } from "../lib/contentful";
 
 export async function GET(context) {
+	const isPreview = context.request.url.includes('preview');
 
-	const entries = await getEntries();
-	const imgMap = await getImgs();
+	const entries = await getEntries(isPreview, {
+		content_type: "markdownPage",
+	});
+	const imgMap = await getImgs(isPreview);
 
 	return rss({
 		title: SITE_TITLE,

@@ -6,8 +6,11 @@ import Head from '../../components/Head.astro';
 import NavigateButton from '../../NavigateButton';
 import { getEntries, getImgs, getHeroImgId } from '../../lib/contentful';
 
-const entries = await getEntries();
-const imgMap = await getImgs();
+const isPreview = Astro.request.url.includes('preview');
+const entries = await getEntries(isPreview, {
+	content_type: "markdownPage",
+});
+const imgMap = await getImgs(isPreview);
 
 // The browser should always check freshness
 Astro.response.headers.set("cache-control", "public, max-age=0, must-revalidate");

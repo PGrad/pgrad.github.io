@@ -12,23 +12,23 @@ export interface BlogPost {
   },
 }
 
-export const contentfulClient = contentful.createClient({
+export const useContentfulClient = (isPreview: boolean) => contentful.createClient({
   space: import.meta.env.CONTENTFUL_SPACE_ID,
-  accessToken: import.meta.env.DEV
+  accessToken: isPreview
     ? import.meta.env.CONTENTFUL_PREVIEW_TOKEN
     : import.meta.env.CONTENTFUL_DELIVERY_TOKEN,
-  host: import.meta.env.DEV ? "preview.contentful.com" : "cdn.contentful.com",
+  host: isPreview ? "preview.contentful.com" : "cdn.contentful.com",
 });
 
-export async function getEntries(): Promise<contentful.EntryCollection<BlogPost>> {
-    const entries = await contentfulClient.getEntries<BlogPost>({
-        content_type: "markdownPage",
-    });
+export async function getEntries(isPreview: boolean, query: any): Promise<contentful.EntryCollection<BlogPost>> {
+    const contentfulClient = useContentfulClient(isPreview);
+    const entries = await contentfulClient.getEntries<BlogPost>(query);
 
     return entries;
 }
 
-export async function getImgs(): Promise<Map<string, string>> {
+export async function getImgs(isPreview: boolean): Promise<Map<string, string>> {
+    const contentfulClient = useContentfulClient(isPreview);
     const imgs = await contentfulClient.getAssets();
 
     const imgMap: Map<string, string> = new Map([
